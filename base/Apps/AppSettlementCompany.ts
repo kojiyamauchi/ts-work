@@ -10,7 +10,7 @@ import SettlementCompanyModal from '@/base/Modules/SettlementCompanyModal'
 export default class AppSettlementCompany {
   private settlementCompanyModal: SettlementCompanyModal
 
-  private constructor() {
+  public constructor() {
     this.settlementCompanyModal = new SettlementCompanyModal()
   }
 

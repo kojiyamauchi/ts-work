@@ -7,7 +7,6 @@
 // Import Modules.
 import jump from 'jump.js'
 import fetch from 'isomorphic-fetch'
-import 'es6-promise'
 
 export default class RenderSettlementCompanyTypeBDetail {
   private url: string
@@ -121,7 +120,8 @@ export default class RenderSettlementCompanyTypeBDetail {
                 ${info.決済事業者2 !== '' ? `<span class="sub-heading03">${info.決済事業者2}</span>` : ''}
               `
               const createCompanyDetailElement = document.createElement('div')
-              createCompanyDetailElement.classList.add('company-detail', 'fn-company-detail')
+              createCompanyDetailElement.classList.add('company-detail')
+              createCompanyDetailElement.classList.add('fn-company-detail')
               // prettier-ignore
               createCompanyDetailElement.innerHTML = `
                 <div class="company-detail-heading">
@@ -448,7 +448,8 @@ export default class RenderSettlementCompanyTypeBDetail {
 
           if (paymentTerminalDataLength > 0) {
             const createPaymentTerminalWrapperElement = document.createElement('div')
-            createPaymentTerminalWrapperElement.classList.add('payment-terminal-wrapper', 'fn-payment-terminal-wrapper')
+            createPaymentTerminalWrapperElement.classList.add('payment-terminal-wrapper')
+            createPaymentTerminalWrapperElement.classList.add('fn-payment-terminal-wrapper')
             createPaymentTerminalWrapperElement.innerHTML = `
               <h4 class="payment-terminal-heading">対応可能な決済端末</h4>
               <div class="payment-terminal-inner fn-payment-terminal-inner"></div>

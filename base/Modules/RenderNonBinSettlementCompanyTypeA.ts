@@ -4,7 +4,6 @@
 
 // Import Modules.
 import fetch from 'isomorphic-fetch'
-import 'es6-promise'
 
 export default class RenderNonBinSettlementCompanyTypeA {
   private url: string
@@ -174,7 +173,8 @@ export default class RenderNonBinSettlementCompanyTypeA {
       addData.map(
         async (info, index): Promise<void> => {
           const createDataListElement = document.createElement('div')
-          createDataListElement.classList.add('data-list', 'fn-data-list')
+          createDataListElement.classList.add('data-list')
+          createDataListElement.classList.add('fn-data-list')
           // prettier-ignore
           createDataListElement.innerHTML = `
             <dl class="data-list-heading">
@@ -251,7 +251,9 @@ export default class RenderNonBinSettlementCompanyTypeA {
       this.moreInformation()
     } else {
       const createDataListElement = document.createElement('div')
-      createDataListElement.classList.add('data-list', 'fn-data-list', 'no-data')
+      createDataListElement.classList.add('data-list')
+      createDataListElement.classList.add('fn-data-list')
+      createDataListElement.classList.add('no-data')
       createDataListElement.textContent = '該当データが有りません。'
       if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
       this.onView()

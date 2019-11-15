@@ -4,7 +4,6 @@
 
 // Import Modules.
 import fetch from 'isomorphic-fetch'
-import 'es6-promise'
 
 export default class RenderBinSettlementCompanyTypeA {
   private url: string
@@ -91,7 +90,8 @@ export default class RenderBinSettlementCompanyTypeA {
       addData.map(
         async (info, index): Promise<void> => {
           const createTableListElement = document.createElement('tr')
-          createTableListElement.classList.add('table-list', 'fn-table-list')
+          createTableListElement.classList.add('table-list')
+          createTableListElement.classList.add('fn-table-list')
           // prettier-ignore
           createTableListElement.innerHTML = `
             <td class="table-data">${info.決済事業者名称}</td>
@@ -113,7 +113,8 @@ export default class RenderBinSettlementCompanyTypeA {
       this.onView()
     } else {
       const createTableListElement = document.createElement('tr')
-      createTableListElement.classList.add('table-list', 'fn-table-list')
+      createTableListElement.classList.add('table-list')
+      createTableListElement.classList.add('fn-table-list')
       createTableListElement.innerHTML = '<td colspan="5" class="table-data no-data">該当データが有りません。</td>'
       if (this.selectors.dataWrapper) this.selectors.dataWrapper.appendChild(createTableListElement)
       this.onView()

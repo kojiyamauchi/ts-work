@@ -14,7 +14,7 @@ export default class AppGlobal {
   private globalNavigation: GlobalNavigation
   private jumpTop: JumpTop
 
-  private constructor() {
+  public constructor() {
     this.viewPort = new ViewPort()
     this.globalNavigation = new GlobalNavigation()
     this.jumpTop = new JumpTop()

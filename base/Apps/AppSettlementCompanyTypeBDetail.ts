@@ -10,7 +10,7 @@ import RenderSettlementCompanyTypeBDetail from '@/base/Modules/RenderSettlementC
 export default class AppSettlementCompanyTypeBDetail {
   private renderSettlementCompanyTypeBDetail: RenderSettlementCompanyTypeBDetail
 
-  private constructor() {
+  public constructor() {
     this.renderSettlementCompanyTypeBDetail = new RenderSettlementCompanyTypeBDetail()
   }
 

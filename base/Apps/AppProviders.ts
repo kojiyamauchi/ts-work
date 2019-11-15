@@ -14,7 +14,7 @@ export default class AppConsumer {
 
   private slideShow: SlideShow
 
-  private constructor() {
+  public constructor() {
     this.selectors = {
       slideContainer: document.querySelector('.fn-slide-container')
     }

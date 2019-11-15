@@ -10,7 +10,7 @@ import RenderBinSettlementCompanyTypeA from '@/base/Modules/RenderBinSettlementC
 export default class AppBinSettlementCompanyTypeA {
   private renderBinSettlementCompanyTypeA: RenderBinSettlementCompanyTypeA
 
-  private constructor() {
+  public constructor() {
     this.renderBinSettlementCompanyTypeA = new RenderBinSettlementCompanyTypeA()
   }
 

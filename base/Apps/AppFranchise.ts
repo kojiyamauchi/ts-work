@@ -21,7 +21,7 @@ export default class AppFranchise {
   private anchorToContact: AnchorLink
   private slideShow: SlideShow
 
-  private constructor() {
+  public constructor() {
     this.selectors = {
       slideContainer: document.querySelector('.fn-slide-container'),
       buttonToRegistrationStep: document.querySelector('.fn-button-to-registration-step'),

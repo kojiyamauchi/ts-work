@@ -4,7 +4,6 @@
 
 // Import Modules.
 import fetch from 'isomorphic-fetch'
-import 'es6-promise'
 
 export default class RenderSettlementCompanyTypeB {
   private url: string
@@ -466,7 +465,8 @@ export default class RenderSettlementCompanyTypeB {
       addData.map(
         async (info, index): Promise<void> => {
           const createDataListElement = document.createElement('a')
-          createDataListElement.classList.add('data-list', 'fn-data-list')
+          createDataListElement.classList.add('data-list')
+          createDataListElement.classList.add('fn-data-list')
           createDataListElement.setAttribute('href', `${this.url}/franchise/settlement-company-typeB-detail.html?dataID=${info.dataID}`)
           // prettier-ignore
           createDataListElement.innerHTML = `
@@ -540,7 +540,9 @@ export default class RenderSettlementCompanyTypeB {
       this.onView()
     } else {
       const createDataListElement = document.createElement('div')
-      createDataListElement.classList.add('data-list', 'fn-data-list', 'no-data')
+      createDataListElement.classList.add('data-list')
+      createDataListElement.classList.add('fn-data-list')
+      createDataListElement.classList.add('no-data')
       createDataListElement.textContent = '該当データが有りません。'
       if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
       this.onView()

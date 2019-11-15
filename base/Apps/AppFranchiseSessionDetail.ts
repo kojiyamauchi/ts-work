@@ -22,7 +22,7 @@ export default class AppFranchiseSessionDetail {
   private modalFirst: Modal
   private modalSecond: Modal
 
-  private constructor() {
+  public constructor() {
     this.selectors = {
       openButtonModalFirst: document.querySelector('.fn-button-modal-first'),
       openButtonModalSecond: document.querySelector('.fn-button-modal-second'),

@@ -10,7 +10,7 @@ import RenderNonBinSettlementCompanyTypeA from '@/base/Modules/RenderNonBinSettl
 export default class AppNonBinSettlementCompanyTypeA {
   private renderNonBinSettlementCompanyTypeA: RenderNonBinSettlementCompanyTypeA
 
-  private constructor() {
+  public constructor() {
     this.renderNonBinSettlementCompanyTypeA = new RenderNonBinSettlementCompanyTypeA()
   }
 

@@ -18,7 +18,7 @@ export default class AppConsumer {
   private slideShow: SlideShow
   private anchorToApp: AnchorLink
 
-  private constructor() {
+  public constructor() {
     this.selectors = {
       slideContainer: document.querySelector('.fn-slide-container'),
       toApp: document.querySelector('.fn-to-app'),
