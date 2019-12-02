@@ -11,7 +11,7 @@ import AnchorLink from '@/base/Modules/AnchorLink'
 export default class AppConsumer {
   private selectors: {
     slideContainer: HTMLElement | null
-    toApp: HTMLElement | null
+    toApp: NodeListOf<HTMLElement>
     anchorApp: HTMLElement | null
   }
 
@@ -21,7 +21,7 @@ export default class AppConsumer {
   public constructor() {
     this.selectors = {
       slideContainer: document.querySelector('.fn-slide-container'),
-      toApp: document.querySelector('.fn-to-app'),
+      toApp: document.querySelectorAll('.fn-to-app'),
       anchorApp: document.querySelector('.fn-anchor-app')
     }
     this.slideShow = new SlideShow(this.selectors.slideContainer!)
