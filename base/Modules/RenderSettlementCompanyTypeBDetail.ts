@@ -115,9 +115,12 @@ export default class RenderSettlementCompanyTypeBDetail {
           const paymentTerminalDataLength = info.対応可能な決済端末.length
           info.個票.map(
             async (eachDataInfo, eachDataIndex): Promise<void> => {
+              const imageCheck = this.getImageUrl(`${this.url}/assets/providers-logo-img/${info.ロゴ画像}`)
+              // prettier-ignore
               this.selectors.heading!.innerHTML = `
+                ${info.ロゴ画像 === '' || imageCheck === undefined ? '' : `<span class="heading-logo-image-wrapper"><img src="/assets/providers-logo-img/${info.ロゴ画像}" class="heading-logo-image" /></span>` }
                 ${info.決済事業者1}
-                ${info.決済事業者2 !== '' ? `<span class="sub-heading03">${info.決済事業者2}</span>` : ''}
+                ${info.決済事業者2 === '' ? '' : `<span class="sub-heading03">${info.決済事業者2}</span>`}
               `
               const createCompanyDetailElement = document.createElement('div')
               createCompanyDetailElement.classList.add('company-detail')

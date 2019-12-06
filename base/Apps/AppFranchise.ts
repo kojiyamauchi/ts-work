@@ -11,7 +11,6 @@ import SlideShow from '@/base/Modules/SlideShow'
 export default class AppFranchise {
   private selectors: {
     slideContainer: HTMLElement | null
-    buttonToSchedule: NodeListOf<HTMLElement>
     anchorSchedule: HTMLElement | null
     buttonToStepsJoin: NodeListOf<HTMLElement>
     anchorStepsJoin: HTMLElement | null
@@ -27,21 +26,24 @@ export default class AppFranchise {
   public constructor() {
     this.selectors = {
       slideContainer: document.querySelector('.fn-slide-container'),
-      buttonToSchedule: document.querySelectorAll('.fn-button-to-schedule'),
       anchorSchedule: document.querySelector('.fn-anchor-schedule'),
       buttonToStepsJoin: document.querySelectorAll('.fn-button-to-steps-join'),
       anchorStepsJoin: document.querySelector('.fn-anchor-steps-join'),
       buttonToContact: document.querySelectorAll('.fn-button-to-contact'),
       anchorContact: document.querySelector('.fn-anchor-contact')
     }
-    this.anchorToSchedule = new AnchorLink(this.selectors.buttonToSchedule, this.selectors.anchorSchedule)
+    this.anchorToSchedule = new AnchorLink(null, this.selectors.anchorSchedule)
     this.anchorToStepsJoin = new AnchorLink(this.selectors.buttonToStepsJoin, this.selectors.anchorStepsJoin)
     this.anchorToContact = new AnchorLink(this.selectors.buttonToContact, this.selectors.anchorContact)
     this.slideShow = new SlideShow(this.selectors.slideContainer!)
   }
 
   public init(): void {
-    this.anchorToSchedule.core()
+    /*
+    Swiper Function's Using 2500ms setTimeout() Function, for Sever-Side Reasons.
+    For That, Delay Activation of Function Below. (for Anchor Link to Swiper Component -> Schedule Component.)
+    */
+    setTimeout((): void => this.anchorToSchedule.forSwiper(document.querySelectorAll('.fn-button-to-schedule')), 2750)
     this.anchorToStepsJoin.core()
     this.anchorToContact.core()
     this.slideShow.core()
