@@ -24,7 +24,7 @@ export default class SlideShow {
           disableOnInteraction: false
         },
         pagination: {
-          el: '.swiper-pagination',
+          el: '.fn-slide-container-pagination',
           type: 'bullets',
           clickable: true
         }
