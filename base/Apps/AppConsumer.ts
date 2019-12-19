@@ -50,6 +50,7 @@ export default class AppConsumer {
   public init(): void {
     this.slideShow.core()
     this.modalSwiper.core()
+    this.modalSwiper.set()
     this.modalSwiper.open()
     this.modalSwiper.close()
     this.anchorToApp.core()
