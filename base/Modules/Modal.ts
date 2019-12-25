@@ -46,10 +46,11 @@ export default class Modal {
     }
     if (this.modalLayer) {
       this.modalLayer.addEventListener('click', (event): void => {
-        const element = event.currentTarget as HTMLElement | null
-        this.modalComponent!.classList.remove('is-active')
-        element!.classList.remove('is-active')
-        this.modalWrapper!.classList.remove('is-active')
+        if (event.currentTarget instanceof HTMLElement) {
+          this.modalComponent!.classList.remove('is-active')
+          event.currentTarget.classList.remove('is-active')
+          this.modalWrapper!.classList.remove('is-active')
+        }
       })
     }
   }

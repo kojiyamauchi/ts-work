@@ -31,7 +31,7 @@ export default class JumpTop {
   }
 
   public showBtn(): void {
-    return this.windowHeight < this.currentScrollY ? this.jumpTopComponent!.classList.add('is-active') : this.jumpTopComponent!.classList.remove('is-active')
+    this.windowHeight < this.currentScrollY ? this.jumpTopComponent!.classList.add('is-active') : this.jumpTopComponent!.classList.remove('is-active')
   }
 
   public toTop(): void {

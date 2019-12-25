@@ -231,9 +231,9 @@ export default class HoldingInformation {
       this.selectors.freeWordBox.value = ''
       this.store.freeWordData = this.store.compData
       this.selectors.freeWordBox.addEventListener('keyup', (event): void => {
-        const currentSelector = event.currentTarget as HTMLInputElement
+        const currentSelector = event.currentTarget instanceof HTMLInputElement ? event.currentTarget : null
         let eachWordSearchResultAry: HoldingInformationMember[][] = []
-        const eachWordAry = currentSelector.value
+        const eachWordAry = currentSelector!.value
           .toLowerCase()
           .split(/[,、]/)
           .map((info: string): string => info.replace(/^\s+/g, '').replace(/\s+$/g, ''))

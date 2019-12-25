@@ -129,11 +129,11 @@ export default class RenderBinSettlementCompanyTypeA {
       this.selectors.freeWordBox.value = ''
       this.store.freeWordData = this.store.initializeData
       this.selectors.freeWordBox.addEventListener('keyup', (event): void => {
-        const currentSelector = event.currentTarget as HTMLInputElement
+        const currentSelector = event.currentTarget instanceof HTMLInputElement ? event.currentTarget : null
         // Initialize Array for Each Input.
         let eachWordSearchResultAry: BinTypeA[][] = []
         // Putting Comma Separated Words in Array.
-        const eachWordAry = currentSelector.value
+        const eachWordAry = currentSelector!.value
           .toLowerCase()
           .split(/[,、]/)
           .map((info: string): string => info.replace(/^\s+/g, '').replace(/\s+$/g, ''))

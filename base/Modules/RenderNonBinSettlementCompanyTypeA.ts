@@ -121,8 +121,7 @@ export default class RenderNonBinSettlementCompanyTypeA {
   private moreInformation(): void {
     Array.from(document.querySelectorAll('.data-information-button'), (selector): void => {
       selector.addEventListener('click', (event): void => {
-        const element = event.currentTarget as HTMLElement
-        element.nextElementSibling!.classList.toggle('is-active')
+        if (event.currentTarget instanceof HTMLElement) event.currentTarget.nextElementSibling!.classList.toggle('is-active')
       })
     })
   }
@@ -272,14 +271,14 @@ export default class RenderNonBinSettlementCompanyTypeA {
           const checkedList: string[] = []
           Array.from(checkBoxPaymentMethodSelectors)
             .filter((checkSelector): boolean => {
-              const inputElement = checkSelector as HTMLInputElement
-              return inputElement.checked
+              const inputElement = checkSelector instanceof HTMLInputElement ? checkSelector : null
+              return inputElement!.checked
             })
             .map((activeCheckBox): void => {
               Object.keys(this.paymentMethodDictionary).filter((keyInfo): void => {
                 if (this.paymentMethodDictionary[keyInfo].includes(activeCheckBox.id)) {
                   checkedList.push(this.paymentMethodDictionary[keyInfo][2])
-                  if (this.paymentMethodDictionary[keyInfo][3]) checkedList.push(this.paymentMethodDictionary[keyInfo][3] as string)
+                  if (this.paymentMethodDictionary[keyInfo][3]) checkedList.push(this.paymentMethodDictionary[keyInfo][3]!)
                 }
               })
             })
@@ -307,11 +306,11 @@ export default class RenderNonBinSettlementCompanyTypeA {
       this.selectors.freeWordBox.value = ''
       this.store.freeWordData = this.store.initializeData
       this.selectors.freeWordBox.addEventListener('keyup', (event): void => {
-        const currentSelector = event.currentTarget as HTMLInputElement
+        const currentSelector = event.currentTarget instanceof HTMLInputElement ? event.currentTarget : null
         // Initialize Array for Each Input.
         let eachWordSearchResultAry: NonBinTypeA[][] = []
         // Putting Comma Separated Words in Array.
-        const eachWordAry = currentSelector.value
+        const eachWordAry = currentSelector!.value
           .toLowerCase()
           .split(/[,、]/)
           .map((info: string): string => info.replace(/^\s+/g, '').replace(/\s+$/g, ''))

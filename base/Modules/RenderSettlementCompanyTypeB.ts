@@ -574,14 +574,14 @@ export default class RenderSettlementCompanyTypeB {
           const checkedList: string[] = []
           Array.from(checkBoxPaymentMethodSelectors)
             .filter((checkSelector): boolean => {
-              const inputElement = checkSelector as HTMLInputElement
-              return inputElement.checked
+              const inputElement = checkSelector instanceof HTMLInputElement ? checkSelector : null
+              return inputElement!.checked
             })
             .map((activeCheckBox): void => {
               Object.keys(this.paymentMethodDictionary).filter((keyInfo): void => {
                 if (this.paymentMethodDictionary[keyInfo].includes(activeCheckBox.id)) {
-                  if (this.paymentMethodDictionary[keyInfo][2]) checkedList.push(this.paymentMethodDictionary[keyInfo][2] as string)
-                  if (this.paymentMethodDictionary[keyInfo][3]) checkedList.push(this.paymentMethodDictionary[keyInfo][3] as string)
+                  if (this.paymentMethodDictionary[keyInfo][2]) checkedList.push(this.paymentMethodDictionary[keyInfo][2]!)
+                  if (this.paymentMethodDictionary[keyInfo][3]) checkedList.push(this.paymentMethodDictionary[keyInfo][3]!)
                 }
               })
             })
@@ -613,14 +613,14 @@ export default class RenderSettlementCompanyTypeB {
           const checkedList: string[] = []
           Array.from(checkBoxUsageTerminalSelectors)
             .filter((checkSelector): boolean => {
-              const inputElement = checkSelector as HTMLInputElement
-              return inputElement.checked
+              const inputElement = checkSelector instanceof HTMLInputElement ? checkSelector : null
+              return inputElement!.checked
             })
             .map((activeCheckBox): void => {
               Object.keys(this.usageTerminalDictionary).filter((keyInfo): void => {
                 if (this.usageTerminalDictionary[keyInfo].includes(activeCheckBox.id)) {
                   checkedList.push(this.usageTerminalDictionary[keyInfo][2])
-                  if (this.usageTerminalDictionary[keyInfo][3]) checkedList.push(this.usageTerminalDictionary[keyInfo][3] as string)
+                  if (this.usageTerminalDictionary[keyInfo][3]) checkedList.push(this.usageTerminalDictionary[keyInfo][3]!)
                 }
               })
             })
@@ -648,19 +648,22 @@ export default class RenderSettlementCompanyTypeB {
       const selectBoxPeriodPaymentSelector = document.querySelector('.fn-select-period-payment-rate')
       this.store.periodPaymentSelectBoxData = this.store.initializeData
       selectBoxPeriodPaymentSelector!.addEventListener('change', (event): void => {
-        const inputElement = event.currentTarget as HTMLInputElement
-        const getValue = inputElement.value
-        this.store.periodPaymentSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-          if (getValue === '') {
-            return dataInfo
-          }
-          const processingNumber =
-            dataInfo.利用料率.lastIndexOf('%') > -1 ? dataInfo.利用料率.slice(dataInfo.利用料率.lastIndexOf('〜') + 1, dataInfo.利用料率.lastIndexOf('%')) : ''
-          if (processingNumber !== '' && Number(getValue) >= Number(processingNumber)) {
-            return dataInfo
-          }
-          return undefined
-        })
+        if (event.currentTarget instanceof HTMLSelectElement) {
+          const getValue = event.currentTarget.value
+          this.store.periodPaymentSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
+            if (getValue === '') {
+              return dataInfo
+            }
+            const processingNumber =
+              dataInfo.利用料率.lastIndexOf('%') > -1
+                ? dataInfo.利用料率.slice(dataInfo.利用料率.lastIndexOf('〜') + 1, dataInfo.利用料率.lastIndexOf('%'))
+                : ''
+            if (processingNumber !== '' && Number(getValue) >= Number(processingNumber)) {
+              return dataInfo
+            }
+            return undefined
+          })
+        }
       })
     }
   }
@@ -673,24 +676,26 @@ export default class RenderSettlementCompanyTypeB {
       const selectBoxRateHandlingSelector = document.querySelector('.fn-select-rate-handling')
       this.store.rateHandlingSelectBoxData = this.store.initializeData
       selectBoxRateHandlingSelector!.addEventListener('change', (event): void => {
-        const inputElement = event.currentTarget as HTMLInputElement
-        const getValue = Object.keys(this.rateHandlingDictionary)
-          .map((keyInfo): string | undefined => {
-            if (this.rateHandlingDictionary[keyInfo].includes(inputElement.value)) {
-              return this.rateHandlingDictionary[keyInfo][2]
+        if (event.currentTarget instanceof HTMLSelectElement) {
+          const inputElement = event.currentTarget
+          const getValue = Object.keys(this.rateHandlingDictionary)
+            .map((keyInfo): string | undefined => {
+              if (this.rateHandlingDictionary[keyInfo].includes(inputElement.value)) {
+                return this.rateHandlingDictionary[keyInfo][2]
+              }
+              return undefined
+            })
+            .filter((info): boolean => info !== undefined)
+          this.store.rateHandlingSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
+            if (getValue.length === 0) {
+              return dataInfo
+            }
+            if (dataInfo.期間終了後の手数料の取扱い === getValue[0]) {
+              return dataInfo
             }
             return undefined
           })
-          .filter((info): boolean => info !== undefined)
-        this.store.rateHandlingSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-          if (getValue.length === 0) {
-            return dataInfo
-          }
-          if (dataInfo.期間終了後の手数料の取扱い === getValue[0]) {
-            return dataInfo
-          }
-          return undefined
-        })
+        }
       })
     }
   }
@@ -703,24 +708,26 @@ export default class RenderSettlementCompanyTypeB {
       const selectBoxPaymentTimingSelector = document.querySelector('.fn-select-payment-timing')
       this.store.paymentTimingSelectBoxData = this.store.initializeData
       selectBoxPaymentTimingSelector!.addEventListener('change', (event): void => {
-        const inputElement = event.currentTarget as HTMLInputElement
-        const getValue = Object.keys(this.paymentTimingDictionary)
-          .map((keyInfo): string | undefined => {
-            if (this.paymentTimingDictionary[keyInfo].includes(inputElement.value)) {
-              return this.paymentTimingDictionary[keyInfo][2]
+        if (event.currentTarget instanceof HTMLSelectElement) {
+          const inputElement = event.currentTarget
+          const getValue = Object.keys(this.paymentTimingDictionary)
+            .map((keyInfo): string | undefined => {
+              if (this.paymentTimingDictionary[keyInfo].includes(inputElement.value)) {
+                return this.paymentTimingDictionary[keyInfo][2]
+              }
+              return undefined
+            })
+            .filter((info): boolean => info !== undefined)
+          this.store.paymentTimingSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
+            if (getValue.length === 0) {
+              return dataInfo
+            }
+            if (dataInfo.入金タイミング === getValue[0]) {
+              return dataInfo
             }
             return undefined
           })
-          .filter((info): boolean => info !== undefined)
-        this.store.paymentTimingSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-          if (getValue.length === 0) {
-            return dataInfo
-          }
-          if (dataInfo.入金タイミング === getValue[0]) {
-            return dataInfo
-          }
-          return undefined
-        })
+        }
       })
     }
   }
@@ -733,37 +740,39 @@ export default class RenderSettlementCompanyTypeB {
       const selectBoxProvideAreaSelector = document.querySelector('.fn-select-provider-area')
       this.store.provideAreaSelectBoxData = this.store.initializeData
       selectBoxProvideAreaSelector!.addEventListener('change', (event): void => {
-        const inputElement = event.currentTarget as HTMLInputElement
-        const getRegionValue = Object.keys(this.providerAreaDictionary)
-          .map((keyInfo): string | undefined => {
-            if (inputElement.value === '') return
-            if (this.providerAreaDictionary[keyInfo].includes(inputElement.value)) {
-              return this.providerAreaDictionary[keyInfo][2]
+        if (event.currentTarget instanceof HTMLSelectElement) {
+          const inputElement = event.currentTarget
+          const getRegionValue = Object.keys(this.providerAreaDictionary)
+            .map((keyInfo): string | undefined => {
+              if (inputElement.value === '') return
+              if (this.providerAreaDictionary[keyInfo].includes(inputElement.value)) {
+                return this.providerAreaDictionary[keyInfo][2]
+              }
+              return undefined
+            })
+            .filter((info): boolean => info !== undefined)
+          const getAreaValue = Object.keys(this.providerAreaDictionary)
+            .map((keyInfo): string | undefined => {
+              if (inputElement.value === '') return
+              if (this.providerAreaDictionary[keyInfo].includes(inputElement.value)) {
+                return this.providerAreaDictionary[keyInfo][3]
+              }
+              return undefined
+            })
+            .filter((info): boolean => info !== undefined)
+          this.store.provideAreaSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
+            if (getRegionValue.length === 0 && getAreaValue.length === 0) {
+              return dataInfo
+            }
+            if (
+              dataInfo.個票.map((individualDataInfo): boolean => individualDataInfo.サービス提供エリア.includes(getRegionValue[0]!)).includes(true) ||
+              dataInfo.個票.map((individualDataInfo): boolean => individualDataInfo.サービス提供エリア.includes(getAreaValue[0]!)).includes(true)
+            ) {
+              return dataInfo
             }
             return undefined
           })
-          .filter((info): boolean => info !== undefined) as string[]
-        const getAreaValue = Object.keys(this.providerAreaDictionary)
-          .map((keyInfo): string | undefined => {
-            if (inputElement.value === '') return
-            if (this.providerAreaDictionary[keyInfo].includes(inputElement.value)) {
-              return this.providerAreaDictionary[keyInfo][3]
-            }
-            return undefined
-          })
-          .filter((info): boolean => info !== undefined) as string[]
-        this.store.provideAreaSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-          if (getRegionValue.length === 0 && getAreaValue.length === 0) {
-            return dataInfo
-          }
-          if (
-            dataInfo.個票.map((individualDataInfo): boolean => individualDataInfo.サービス提供エリア.includes(getRegionValue[0])).includes(true) ||
-            dataInfo.個票.map((individualDataInfo): boolean => individualDataInfo.サービス提供エリア.includes(getAreaValue[0])).includes(true)
-          ) {
-            return dataInfo
-          }
-          return undefined
-        })
+        }
       })
     }
   }
@@ -776,11 +785,11 @@ export default class RenderSettlementCompanyTypeB {
       this.selectors.freeWordBox.value = ''
       this.store.freeWordData = this.store.initializeData
       this.selectors.freeWordBox.addEventListener('keyup', (event): void => {
-        const currentSelector = event.currentTarget as HTMLInputElement
+        const currentSelector = event.currentTarget instanceof HTMLInputElement ? event.currentTarget : null
         // Initialize Array for Each Input.
         let eachWordSearchResultAry: TypeB[][] = []
         // Putting Comma Separated Words in Array.
-        const eachWordAry = currentSelector.value
+        const eachWordAry = currentSelector!.value
           .toLowerCase()
           .split(/[,、]/)
           .map((info: string): string => info.replace(/^\s+/g, '').replace(/\s+$/g, ''))

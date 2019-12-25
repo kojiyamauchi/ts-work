@@ -54,13 +54,12 @@ export default class GlobalNavigation {
 
   public showMenu(): void {
     this.menuBtn!.addEventListener('click', (event: MouseEvent): void => {
-      const element = event.currentTarget as HTMLElement
       this.documentHeight = document.body.clientHeight
-      if (this.isMobile) {
-        element.classList.toggle('is-active')
+      if (this.isMobile && event.currentTarget instanceof HTMLElement) {
+        event.currentTarget.classList.toggle('is-active')
         this.GN!.classList.toggle('is-active')
         this.navLayer!.classList.toggle('is-active')
-        if (element.classList.contains('is-active')) {
+        if (event.currentTarget.classList.contains('is-active')) {
           this.navLayer!.style.height = `${this.documentHeight}px`
           this.menuLetter!.textContent = 'close'
         } else {
@@ -74,9 +73,12 @@ export default class GlobalNavigation {
   public showSubMenu(): void {
     Array.from(this.subMenuBtn, (selector): void => {
       selector.addEventListener('click', (event: MouseEvent): void => {
-        const element = event.currentTarget as HTMLElement
-        const nextElement = element.nextElementSibling as HTMLElement
-        if (this.isMobile && !!element.nextElementSibling && !this.componentHeader!.classList.contains('pre-header')) {
+        const element = event.currentTarget instanceof HTMLElement ? event.currentTarget : null
+        const nextElement =
+          event.currentTarget instanceof HTMLElement && event.currentTarget.nextElementSibling instanceof HTMLElement
+            ? event.currentTarget.nextElementSibling
+            : null
+        if (this.isMobile && element && nextElement && !this.componentHeader!.classList.contains('pre-header')) {
           element.classList.toggle('is-active')
           nextElement.classList.toggle('is-active')
           nextElement.classList.contains('is-active')

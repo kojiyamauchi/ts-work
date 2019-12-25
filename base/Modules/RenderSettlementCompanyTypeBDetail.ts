@@ -78,8 +78,11 @@ export default class RenderSettlementCompanyTypeBDetail {
     const getNodeList = document.querySelectorAll('.fn-button-each-payment-terminal-heading')
     Array.from(getNodeList, (selector): void => {
       selector.addEventListener('click', (event): void => {
-        const element = event.currentTarget as HTMLElement | null
-        const nextElement = element!.nextElementSibling as HTMLElement | null
+        const element = event.currentTarget instanceof HTMLElement ? event.currentTarget : null
+        const nextElement =
+          event.currentTarget instanceof HTMLElement && event.currentTarget.nextElementSibling instanceof HTMLElement
+            ? event.currentTarget.nextElementSibling
+            : null
         if (!nextElement!.classList.contains('is-active')) {
           Array.from(getNodeList, (initializeSelector): void => {
             initializeSelector!.nextElementSibling!.classList.remove('is-active')

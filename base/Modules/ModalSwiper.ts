@@ -55,18 +55,12 @@ export default class ModalSwiper {
       const mySwiper = this.modalSwiperContainer!.swiper
       Array.from(this.openButton, (selector): void => {
         selector.addEventListener('click', (event): void => {
-          const element = event.currentTarget as HTMLElement
-          mySwiper.slideTo(element.dataset.slideIndex, 0, false)
-          this.modalWrapper!.classList.add('is-active')
-          this.modalComponent!.classList.add('is-active')
-          this.closeButton!.classList.add('is-active')
-          /* Type Guard.
           if (event.currentTarget instanceof HTMLElement) {
             mySwiper.slideTo(event.currentTarget.dataset.slideIndex, 0, false)
             this.modalWrapper!.classList.add('is-active')
             this.modalComponent!.classList.add('is-active')
             this.closeButton!.classList.add('is-active')
-          } */
+          }
         })
       })
     }
