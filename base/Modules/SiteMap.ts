@@ -64,7 +64,7 @@ export default class SiteMap {
           createListElement.innerHTML = `
             <a href="${info.endPoint}" class="letter is-${info.category}">
               <span class="tag">${info.category.toUpperCase()}</span><br>
-              ${info.letter}
+              ${info.pageName}
             </a>
           `
           if (this.selectors.listInner) {
