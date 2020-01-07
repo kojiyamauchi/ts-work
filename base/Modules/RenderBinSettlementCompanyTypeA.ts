@@ -128,7 +128,7 @@ export default class RenderBinSettlementCompanyTypeA {
     if (this.selectors.freeWordBox) {
       this.selectors.freeWordBox.value = ''
       this.store.freeWordData = this.store.initializeData
-      this.selectors.freeWordBox.addEventListener('keyup', (event): void => {
+      this.selectors.freeWordBox.addEventListener('input', (event): void => {
         const currentSelector = event.currentTarget instanceof HTMLInputElement ? event.currentTarget : null
         // Initialize Array for Each Input.
         let eachWordSearchResultAry: BinTypeA[][] = []
