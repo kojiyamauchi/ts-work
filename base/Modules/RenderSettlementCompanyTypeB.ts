@@ -476,7 +476,7 @@ export default class RenderSettlementCompanyTypeB {
     if (addData.length > 0) {
       addData.map(
         async (info, index): Promise<void> => {
-          const imageCheck = this.getImageUrl(`${this.url}/assets/providers-logo-img/${info.ロゴ画像}`)
+          const imageCheck = this.getImageUrl(`${this.url}/assets/img/${info.dataID}.png`)
           const createDataListElement = document.createElement('a')
           createDataListElement.classList.add('data-list')
           createDataListElement.classList.add('fn-data-list')
@@ -489,7 +489,7 @@ export default class RenderSettlementCompanyTypeB {
                 ${info.決済事業者2 !== '' ? info.決済事業者1.length >= 18 ? `/ ${info.決済事業者2}` : `<span class="data-list-sub-heading-letter">${info.決済事業者2}</span>` : ''}
               </dt>
               <dd class="data-list-heading-logo">
-                ${info.ロゴ画像 === '' || imageCheck === undefined ? '<img src="/assets/providers-logo-img/logo_cashless.png" class="data-list-heading-logo-image" />' : `<img src="/assets/providers-logo-img/${info.ロゴ画像}" class="data-list-heading-logo-image" />` }
+                ${info.dataID === null || imageCheck === undefined ? '<img src="/assets/img/logo_dummy.png" class="data-list-heading-logo-image" />' : `<img src="/assets/img/${info.dataID}.png" class="data-list-heading-logo-image" />` }
               </dd>
             </dl>
             <dl class="data-list-icon-wrapper">

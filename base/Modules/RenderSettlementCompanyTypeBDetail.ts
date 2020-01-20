@@ -118,10 +118,10 @@ export default class RenderSettlementCompanyTypeBDetail {
           const paymentTerminalDataLength = info.対応可能な決済端末.length
           info.個票.map(
             async (eachDataInfo, eachDataIndex): Promise<void> => {
-              const imageCheck = this.getImageUrl(`${this.url}/assets/providers-logo-img/${info.ロゴ画像}`)
+              const imageCheck = this.getImageUrl(`${this.url}/assets/img/${info.dataID}.png`)
               // prettier-ignore
               this.selectors.heading!.innerHTML = `
-                ${info.ロゴ画像 === '' || imageCheck === undefined ? '' : `<span class="heading-logo-image-wrapper"><img src="/assets/providers-logo-img/${info.ロゴ画像}" class="heading-logo-image" /></span>` }
+                ${info.dataID === null || imageCheck === undefined ? '' : `<span class="heading-logo-image-wrapper"><img src="/assets/img/${info.dataID}.png" class="heading-logo-image" /></span>` }
                 ${info.決済事業者1}
                 ${info.決済事業者2 === '' ? '' : `<span class="sub-heading03">${info.決済事業者2}</span>`}
               `
