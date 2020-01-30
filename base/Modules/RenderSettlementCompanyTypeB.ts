@@ -29,6 +29,8 @@ export default class RenderSettlementCompanyTypeB {
 
   private store: {
     firstRender: boolean
+    scrollCount: number
+    renderQuantity: number
     initializeData: TypeB[]
     paymentMethodCheckBoxData: TypeB[]
     usageTerminalCheckBoxData: TypeB[]
@@ -37,6 +39,7 @@ export default class RenderSettlementCompanyTypeB {
     paymentTimingSelectBoxData: TypeB[]
     provideAreaSelectBoxData: TypeB[]
     freeWordData: TypeB[]
+    publicationData: TypeB[]
   }
 
   public constructor() {
@@ -175,6 +178,8 @@ export default class RenderSettlementCompanyTypeB {
     // Array to Store Each Data.
     this.store = {
       firstRender: true,
+      scrollCount: 0,
+      renderQuantity: 20,
       initializeData: [],
       paymentMethodCheckBoxData: [],
       usageTerminalCheckBoxData: [],
@@ -182,7 +187,8 @@ export default class RenderSettlementCompanyTypeB {
       rateHandlingSelectBoxData: [],
       paymentTimingSelectBoxData: [],
       provideAreaSelectBoxData: [],
-      freeWordData: []
+      freeWordData: [],
+      publicationData: []
     }
   }
 
@@ -222,6 +228,7 @@ export default class RenderSettlementCompanyTypeB {
     return new Promise((resolve): void => resolve(arg))
   }
 
+  // @ts-ignore TS6133: 'sleep' is declared but its value is never read.
   private sleep(ms: number): Promise<number> {
     return new Promise((resolve): number => {
       return setTimeout(resolve, ms)
@@ -231,7 +238,7 @@ export default class RenderSettlementCompanyTypeB {
   private async getData(): Promise<void> {
     try {
       const getData = await fetch(this.endPoint, { credentials: 'same-origin' })
-      this.store.initializeData = await getData.json()
+      this.store.publicationData = this.store.initializeData = await getData.json()
     } catch (error) {
       console.error('error: ', error)
     }
@@ -255,12 +262,13 @@ export default class RenderSettlementCompanyTypeB {
     Array.from(document.querySelectorAll('.fn-data-list'), (dataList): void => {
       this.selectors.lists!.removeChild(dataList)
     })
+    this.store.scrollCount = 0
   }
 
   private onView(): void {
     if (this.store.firstRender) this.selectors.searchArea!.classList.add('is-active')
     this.selectors.lists!.classList.add('is-active')
-    this.selectors.loading!.classList.add('is-inactive')
+    this.selectors.loading!.classList.add('is-scroll-loading')
     this.store.firstRender = false
   }
 
@@ -472,17 +480,17 @@ export default class RenderSettlementCompanyTypeB {
   Render Data List Core.
   */
   private async render(addData: TypeB[]): Promise<void> {
-    const renderDelay = 10
     if (addData.length > 0) {
       addData.map(
         async (info, index): Promise<void> => {
-          const imageCheck = this.getImageUrl(`${this.url}/assets/img/${info.dataID}.png`)
-          const createDataListElement = document.createElement('a')
-          createDataListElement.classList.add('data-list')
-          createDataListElement.classList.add('fn-data-list')
-          createDataListElement.setAttribute('href', `${this.url}/franchise/settlement-company-typeB-detail.html?dataID=${info.dataID}`)
-          // prettier-ignore
-          createDataListElement.innerHTML = `
+          if (this.store.scrollCount * this.store.renderQuantity <= index && index < (this.store.scrollCount + 1) * this.store.renderQuantity) {
+            const imageCheck = this.getImageUrl(`${this.url}/assets/img/${info.dataID}.png`)
+            const createDataListElement = document.createElement('a')
+            createDataListElement.classList.add('data-list')
+            createDataListElement.classList.add('fn-data-list')
+            createDataListElement.setAttribute('href', `${this.url}/franchise/settlement-company-typeB-detail.html?dataID=${info.dataID}`)
+            // prettier-ignore
+            createDataListElement.innerHTML = `
             <dl class="data-list-heading">
               <dt class="data-list-heading-letter">
                 ${info.決済事業者1}
@@ -543,14 +551,10 @@ export default class RenderSettlementCompanyTypeB {
               </dl>
             </div>
           `
-          if (this.selectors.lists) {
-            await this.sleep(renderDelay * index)
-            this.selectors.lists.appendChild(createDataListElement)
+            if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
           }
         }
       )
-      await this.sleep(renderDelay * addData.length)
-      this.onView()
     } else {
       const createDataListElement = document.createElement('div')
       createDataListElement.classList.add('data-list')
@@ -558,8 +562,9 @@ export default class RenderSettlementCompanyTypeB {
       createDataListElement.classList.add('no-data')
       createDataListElement.textContent = '該当データが有りません。'
       if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
-      this.onView()
+      this.selectors.loading!.classList.add('is-inactive')
     }
+    if (!this.store.scrollCount) this.onView()
   }
 
   /*
@@ -925,13 +930,13 @@ export default class RenderSettlementCompanyTypeB {
         this.store.provideAreaSelectBoxData,
         this.store.freeWordData
       ]
-      const processingData = concatenateSearchData.reduce((accumulator, current): TypeB[] => {
+      this.store.publicationData = concatenateSearchData.reduce((accumulator, current): TypeB[] => {
         return [...accumulator, ...current].filter((info, index, array): boolean => {
           return array.indexOf(info) === index && index !== array.lastIndexOf(info)
         })
       }, this.store.initializeData)
       this.initializeList()
-      this.render(processingData)
+      this.render(this.store.publicationData)
     }
     if (this.selectors.searchButton) {
       // Require When Click Search Button.
@@ -944,7 +949,7 @@ export default class RenderSettlementCompanyTypeB {
   }
 
   /*
-  Require.
+  Require Core.
   */
   public async core(): Promise<void> {
     await this.resolvedPromise(this.getData())
@@ -954,7 +959,7 @@ export default class RenderSettlementCompanyTypeB {
     this.renderRateHandlingSelectBox()
     this.renderPaymentTimingSelectBox()
     this.renderProvideAreaSelectBox()
-    this.render(this.store.initializeData)
+    this.render(this.store.publicationData)
     this.searchPaymentMethodCheckBox()
     this.searchUsageTerminalCheckBox()
     this.searchPeriodPaymentRateSelectBox()
@@ -963,5 +968,19 @@ export default class RenderSettlementCompanyTypeB {
     this.searchProvideAreaSelectBox()
     this.searchFreeWord()
     this.searchResultRender()
+  }
+
+  /*
+  Infinite Scroll Render.
+  */
+  public infiniteScrollRender(): void {
+    if (!this.store.firstRender && window.pageYOffset > this.selectors.lists!.clientHeight) {
+      if (this.store.scrollCount < this.store.publicationData.length / this.store.renderQuantity) {
+        this.store.scrollCount += 1
+        this.render(this.store.publicationData)
+      } else {
+        this.selectors.loading!.classList.add('is-inactive')
+      }
+    }
   }
 }

@@ -24,5 +24,7 @@ export default class AppSettlementCompanyTypeB {
 
   public resize(): void {}
 
-  public scroll(): void {}
+  public scroll(): void {
+    this.renderSettlementCompanyTypeB.infiniteScrollRender()
+  }
 }

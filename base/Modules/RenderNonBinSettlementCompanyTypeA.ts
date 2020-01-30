@@ -21,9 +21,12 @@ export default class RenderNonBinSettlementCompanyTypeA {
   private paymentMethodDictionary: CommonDictionaryTypes
   private store: {
     firstRender: boolean
+    scrollCount: number
+    renderQuantity: number
     initializeData: NonBinTypeA[]
     paymentMethodCheckBoxData: NonBinTypeA[]
     freeWordData: NonBinTypeA[]
+    publicationData: NonBinTypeA[]
   }
 
   public constructor() {
@@ -59,9 +62,12 @@ export default class RenderNonBinSettlementCompanyTypeA {
     // Array to Store Each Data.
     this.store = {
       firstRender: true,
+      scrollCount: 0,
+      renderQuantity: 20,
       initializeData: [],
       paymentMethodCheckBoxData: [],
-      freeWordData: []
+      freeWordData: [],
+      publicationData: []
     }
   }
 
@@ -86,6 +92,7 @@ export default class RenderNonBinSettlementCompanyTypeA {
     return new Promise((resolve): void => resolve(arg))
   }
 
+  // @ts-ignore TS6133: 'sleep' is declared but its value is never read.
   private sleep(ms: number): Promise<number> {
     return new Promise((resolve): number => {
       return setTimeout(resolve, ms)
@@ -95,7 +102,7 @@ export default class RenderNonBinSettlementCompanyTypeA {
   private async getData(): Promise<void> {
     try {
       const getData = await fetch(this.endPoint, { credentials: 'same-origin' })
-      this.store.initializeData = await getData.json()
+      this.store.publicationData = this.store.initializeData = await getData.json()
     } catch (error) {
       console.error('error: ', error)
     }
@@ -108,13 +115,14 @@ export default class RenderNonBinSettlementCompanyTypeA {
     Array.from(document.querySelectorAll('.fn-data-list'), (dataList): void => {
       this.selectors.lists!.removeChild(dataList)
     })
+    this.store.scrollCount = 0
   }
 
   private onView(): void {
     if (this.store.firstRender) this.selectors.searchArea!.classList.add('is-active')
     this.selectors.lists!.classList.add('is-active')
     this.selectors.searchTargetStoreButton!.classList.add('is-active')
-    this.selectors.loading!.classList.add('is-inactive')
+    this.selectors.loading!.classList.add('is-scroll-loading')
     this.store.firstRender = false
   }
 
@@ -167,15 +175,15 @@ export default class RenderNonBinSettlementCompanyTypeA {
   Render Data List Core.
   */
   private async render(addData: NonBinTypeA[]): Promise<void> {
-    const renderDelay = 10
     if (addData.length > 0) {
       addData.map(
         async (info, index): Promise<void> => {
-          const createDataListElement = document.createElement('div')
-          createDataListElement.classList.add('data-list')
-          createDataListElement.classList.add('fn-data-list')
-          // prettier-ignore
-          createDataListElement.innerHTML = `
+          if (this.store.scrollCount * this.store.renderQuantity <= index && index < (this.store.scrollCount + 1) * this.store.renderQuantity) {
+            const createDataListElement = document.createElement('div')
+            createDataListElement.classList.add('data-list')
+            createDataListElement.classList.add('fn-data-list')
+            // prettier-ignore
+            createDataListElement.innerHTML = `
             <dl class="data-list-heading">
               <dt class="data-list-heading-letter">
                 ${info.キャッシュレスサービス名称}
@@ -239,14 +247,10 @@ export default class RenderNonBinSettlementCompanyTypeA {
               </dd>
             </dl>
           `
-          if (this.selectors.lists) {
-            await this.sleep(renderDelay * index)
-            this.selectors.lists.appendChild(createDataListElement)
+            if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
           }
         }
       )
-      await this.sleep(renderDelay * addData.length)
-      this.onView()
       this.moreInformation()
     } else {
       const createDataListElement = document.createElement('div')
@@ -255,8 +259,9 @@ export default class RenderNonBinSettlementCompanyTypeA {
       createDataListElement.classList.add('no-data')
       createDataListElement.textContent = '該当データが有りません。'
       if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
-      this.onView()
+      this.selectors.loading!.classList.add('is-inactive')
     }
+    if (!this.store.scrollCount) this.onView()
   }
 
   /*
@@ -458,13 +463,13 @@ export default class RenderNonBinSettlementCompanyTypeA {
     // Search Result Core.
     const searchResultCore = (): void => {
       const concatenateSearchData = [this.store.paymentMethodCheckBoxData, this.store.freeWordData]
-      const processingData = concatenateSearchData.reduce((accumulator, current): NonBinTypeA[] => {
+      this.store.publicationData = concatenateSearchData.reduce((accumulator, current): NonBinTypeA[] => {
         return [...accumulator, ...current].filter((info, index, array): boolean => {
           return array.indexOf(info) === index && index !== array.lastIndexOf(info)
         })
       }, this.store.initializeData)
       this.initializeList()
-      this.render(processingData)
+      this.render(this.store.publicationData)
     }
     if (this.selectors.searchButton) {
       // Require When Click Search Button.
@@ -479,9 +484,20 @@ export default class RenderNonBinSettlementCompanyTypeA {
   public async core(): Promise<void> {
     await this.resolvedPromise(this.getData())
     this.renderPaymentMethodCheckBox()
-    this.render(this.store.initializeData)
+    this.render(this.store.publicationData)
     this.searchPaymentMethodCheckBox()
     this.searchFreeWord()
     this.searchResultRender()
+  }
+
+  public infiniteScrollRender(): void {
+    if (!this.store.firstRender && window.pageYOffset > this.selectors.lists!.clientHeight) {
+      if (this.store.scrollCount < this.store.publicationData.length / this.store.renderQuantity) {
+        this.store.scrollCount += 1
+        this.render(this.store.publicationData)
+      } else {
+        this.selectors.loading!.classList.add('is-inactive')
+      }
+    }
   }
 }

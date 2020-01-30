@@ -24,5 +24,7 @@ export default class AppNonBinSettlementCompanyTypeA {
 
   public resize(): void {}
 
-  public scroll(): void {}
+  public scroll(): void {
+    this.renderNonBinSettlementCompanyTypeA.infiniteScrollRender()
+  }
 }
