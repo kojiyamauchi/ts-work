@@ -7,7 +7,7 @@
 // Import Modules.
 import SlideShow from '@/base/Modules/SlideShow'
 
-export default class AppConsumer {
+export default class AppProviders {
   private selectors: {
     slideContainer: HTMLElement | null
   }

@@ -8,7 +8,7 @@
 import SlideShow from '@/base/Modules/SlideShow'
 import AnchorLink from '@/base/Modules/AnchorLink'
 
-export default class AppConsumer {
+export default class AppTop {
   private selectors: {
     slideContainer: HTMLElement | null
     toApp: NodeListOf<HTMLElement>
