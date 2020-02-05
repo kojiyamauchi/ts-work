@@ -14,6 +14,7 @@ export default class RenderSettlementCompanyTypeB {
     freeWordBox: HTMLInputElement | null
     searchButton: HTMLElement | null
     loading: HTMLElement | null
+    listsWrapper: HTMLElement | null
     lists: HTMLElement | null
   }
 
@@ -29,6 +30,7 @@ export default class RenderSettlementCompanyTypeB {
 
   private store: {
     firstRender: boolean
+    scrollRender: boolean
     scrollCount: number
     renderQuantity: number
     initializeData: TypeB[]
@@ -51,6 +53,7 @@ export default class RenderSettlementCompanyTypeB {
       freeWordBox: document.querySelector('.fn-free-word'),
       searchButton: document.querySelector('.fn-search-button'),
       loading: document.querySelector('.fn-icon-loading'),
+      listsWrapper: document.querySelector('.fn-components-settlement-company-lists'),
       lists: document.querySelector('.fn-lists')
     }
     /*
@@ -175,9 +178,10 @@ export default class RenderSettlementCompanyTypeB {
       その他: 'icon_card_et',
       デビットカード: 'icon_card_jd'
     }
-    // Array to Store Each Data.
+    // State in This File.
     this.store = {
       firstRender: true,
+      scrollRender: true,
       scrollCount: 0,
       renderQuantity: 20,
       initializeData: [],
@@ -263,12 +267,15 @@ export default class RenderSettlementCompanyTypeB {
       this.selectors.lists!.removeChild(dataList)
     })
     this.store.scrollCount = 0
+    this.store.scrollRender = true
   }
 
   private onView(): void {
-    if (this.store.firstRender) this.selectors.searchArea!.classList.add('is-active')
+    if (this.store.firstRender) {
+      this.selectors.searchArea!.classList.add('is-active')
+      this.selectors.listsWrapper!.classList.add('is-active')
+    }
     this.selectors.lists!.classList.add('is-active')
-    this.selectors.loading!.classList.add('is-scroll-loading')
     this.store.firstRender = false
   }
 
@@ -283,10 +290,7 @@ export default class RenderSettlementCompanyTypeB {
       <dd class="each-checkbox-data fn-checkbox-payment-method"></dd>
       <dd class="checkbox-payment-method-notes">&#8251;クレジットカードは、国際ブランドに対応しているサービスのみが表示されます。</dd>
     `
-    if (this.selectors.searchItemsWrapper) {
-      this.selectors.searchItemsWrapper.appendChild(createEachCheckBoxWrapperElement)
-    }
-
+    if (this.selectors.searchItemsWrapper) this.selectors.searchItemsWrapper.appendChild(createEachCheckBoxWrapperElement)
     Object.keys(this.paymentMethodDictionary).map((info): void => {
       if (this.paymentMethodDictionary[info][0]) {
         const createEachCheckBoxElement = document.createElement('span')
@@ -304,9 +308,7 @@ export default class RenderSettlementCompanyTypeB {
           </label>
            ${info === 'クレジットカード' ? '<span class="mark-notes">&#8251</span>' : ''}
         `
-        if (document.querySelector('.fn-checkbox-payment-method')) {
-          document.querySelector('.fn-checkbox-payment-method')!.appendChild(createEachCheckBoxElement)
-        }
+        if (document.querySelector('.fn-checkbox-payment-method')) document.querySelector('.fn-checkbox-payment-method')!.appendChild(createEachCheckBoxElement)
       }
     })
   }
@@ -321,9 +323,7 @@ export default class RenderSettlementCompanyTypeB {
       <dt class="each-checkbox-heading">利用決済端末</dt>
       <dd class="each-checkbox-data fn-checkbox-usage-terminal"></dd>
     `
-    if (this.selectors.searchItemsWrapper) {
-      this.selectors.searchItemsWrapper.appendChild(createEachCheckBoxWrapperElement)
-    }
+    if (this.selectors.searchItemsWrapper) this.selectors.searchItemsWrapper.appendChild(createEachCheckBoxWrapperElement)
     Object.keys(this.usageTerminalDictionary).map((info): void => {
       if (this.usageTerminalDictionary[info][0]) {
         const createEachCheckBoxElement = document.createElement('span')
@@ -341,9 +341,7 @@ export default class RenderSettlementCompanyTypeB {
            ${info}
           </label>
         `
-        if (document.querySelector('.fn-checkbox-usage-terminal')) {
-          document.querySelector('.fn-checkbox-usage-terminal')!.appendChild(createEachCheckBoxElement)
-        }
+        if (document.querySelector('.fn-checkbox-usage-terminal')) document.querySelector('.fn-checkbox-usage-terminal')!.appendChild(createEachCheckBoxElement)
       }
     })
   }
@@ -361,9 +359,7 @@ export default class RenderSettlementCompanyTypeB {
         <select class="each-select-data fn-select-period-payment-rate"></select>
       </dd>
     `
-    if (this.selectors.searchItemsWrapper) {
-      this.selectors.searchItemsWrapper.appendChild(createEachSelectBoxWrapperElement)
-    }
+    if (this.selectors.searchItemsWrapper) this.selectors.searchItemsWrapper.appendChild(createEachSelectBoxWrapperElement)
     Object.keys(this.periodPaymentRateDictionary).map((info): void => {
       if (this.periodPaymentRateDictionary[info][0]) {
         option += `
@@ -375,9 +371,7 @@ export default class RenderSettlementCompanyTypeB {
         `
       }
     })
-    if (document.querySelector('.fn-select-period-payment-rate')) {
-      document.querySelector('.fn-select-period-payment-rate')!.innerHTML = option
-    }
+    if (document.querySelector('.fn-select-period-payment-rate')) document.querySelector('.fn-select-period-payment-rate')!.innerHTML = option
   }
 
   /*
@@ -393,9 +387,7 @@ export default class RenderSettlementCompanyTypeB {
         <select class="each-select-data fn-select-rate-handling"></select>
       </dd>
     `
-    if (this.selectors.searchItemsWrapper) {
-      this.selectors.searchItemsWrapper.appendChild(createEachSelectBoxWrapperElement)
-    }
+    if (this.selectors.searchItemsWrapper) this.selectors.searchItemsWrapper.appendChild(createEachSelectBoxWrapperElement)
     Object.keys(this.rateHandlingDictionary).map((info): void => {
       if (this.rateHandlingDictionary[info][0]) {
         option += `
@@ -407,9 +399,7 @@ export default class RenderSettlementCompanyTypeB {
         `
       }
     })
-    if (document.querySelector('.fn-select-rate-handling')) {
-      document.querySelector('.fn-select-rate-handling')!.innerHTML = option
-    }
+    if (document.querySelector('.fn-select-rate-handling')) document.querySelector('.fn-select-rate-handling')!.innerHTML = option
   }
 
   /*
@@ -425,9 +415,7 @@ export default class RenderSettlementCompanyTypeB {
         <select class="each-select-data fn-select-payment-timing"></select>
       </dd>
     `
-    if (this.selectors.searchItemsWrapper) {
-      this.selectors.searchItemsWrapper.appendChild(createEachSelectBoxWrapperElement)
-    }
+    if (this.selectors.searchItemsWrapper) this.selectors.searchItemsWrapper.appendChild(createEachSelectBoxWrapperElement)
     Object.keys(this.paymentTimingDictionary).map((info): void => {
       if (this.paymentTimingDictionary[info][0]) {
         option += `
@@ -439,9 +427,7 @@ export default class RenderSettlementCompanyTypeB {
         `
       }
     })
-    if (document.querySelector('.fn-select-payment-timing')) {
-      document.querySelector('.fn-select-payment-timing')!.innerHTML = option
-    }
+    if (document.querySelector('.fn-select-payment-timing')) document.querySelector('.fn-select-payment-timing')!.innerHTML = option
   }
 
   /*
@@ -457,9 +443,7 @@ export default class RenderSettlementCompanyTypeB {
         <select class="each-select-data fn-select-provider-area"></select>
       </dd>
     `
-    if (this.selectors.searchItemsWrapper) {
-      this.selectors.searchItemsWrapper.appendChild(createEachSelectBoxWrapperElement)
-    }
+    if (this.selectors.searchItemsWrapper) this.selectors.searchItemsWrapper.appendChild(createEachSelectBoxWrapperElement)
     Object.keys(this.providerAreaDictionary).map((info): void => {
       if (this.providerAreaDictionary[info][0]) {
         option += `
@@ -471,26 +455,23 @@ export default class RenderSettlementCompanyTypeB {
         `
       }
     })
-    if (document.querySelector('.fn-select-provider-area')) {
-      document.querySelector('.fn-select-provider-area')!.innerHTML = option
-    }
+    if (document.querySelector('.fn-select-provider-area')) document.querySelector('.fn-select-provider-area')!.innerHTML = option
   }
 
   /*
   Render Data List Core.
   */
-  private async render(addData: TypeB[]): Promise<void> {
+  private render(addData: TypeB[]): void {
     if (addData.length > 0) {
-      addData.map(
-        async (info, index): Promise<void> => {
-          if (this.store.scrollCount * this.store.renderQuantity <= index && index < (this.store.scrollCount + 1) * this.store.renderQuantity) {
-            const imageCheck = this.getImageUrl(`${this.url}/assets/img/${info.dataID}.png`)
-            const createDataListElement = document.createElement('a')
-            createDataListElement.classList.add('data-list')
-            createDataListElement.classList.add('fn-data-list')
-            createDataListElement.setAttribute('href', `${this.url}/franchise/settlement-company-typeB-detail.html?dataID=${info.dataID}`)
-            // prettier-ignore
-            createDataListElement.innerHTML = `
+      addData.map((info, index): void => {
+        if (this.store.scrollCount * this.store.renderQuantity <= index && index < (this.store.scrollCount + 1) * this.store.renderQuantity) {
+          const imageCheck = this.getImageUrl(`${this.url}/assets/img/${info.dataID}.png`)
+          const createDataListElement = document.createElement('a')
+          createDataListElement.classList.add('data-list')
+          createDataListElement.classList.add('fn-data-list')
+          createDataListElement.setAttribute('href', `${this.url}/franchise/settlement-company-typeB-detail.html?dataID=${info.dataID}`)
+          // prettier-ignore
+          createDataListElement.innerHTML = `
             <dl class="data-list-heading">
               <dt class="data-list-heading-letter">
                 ${info.決済事業者1}
@@ -551,10 +532,12 @@ export default class RenderSettlementCompanyTypeB {
               </dl>
             </div>
           `
-            if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
-          }
+          if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
         }
-      )
+      })
+      addData.length > this.store.renderQuantity
+        ? this.selectors.loading!.classList.add('is-scroll-loading')
+        : this.selectors.loading!.classList.add('is-inactive')
     } else {
       const createDataListElement = document.createElement('div')
       createDataListElement.classList.add('data-list')
@@ -591,13 +574,9 @@ export default class RenderSettlementCompanyTypeB {
               })
             })
           this.store.paymentMethodCheckBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-            if (checkedList.length === 0) {
-              return dataInfo
-            }
+            if (checkedList.length === 0) return dataInfo
             for (let i = 0; i < checkedList.length; i++) {
-              if (dataInfo.利用可能な決済手段.includes(checkedList[i])) {
-                return dataInfo
-              }
+              if (dataInfo.利用可能な決済手段.includes(checkedList[i])) return dataInfo
             }
             return undefined
           })
@@ -630,13 +609,9 @@ export default class RenderSettlementCompanyTypeB {
               })
             })
           this.store.usageTerminalCheckBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-            if (checkedList.length === 0) {
-              return dataInfo
-            }
+            if (checkedList.length === 0) return dataInfo
             for (let i = 0; i < checkedList.length; i++) {
-              if (dataInfo.利用決済端末 === checkedList[i]) {
-                return dataInfo
-              }
+              if (dataInfo.利用決済端末 === checkedList[i]) return dataInfo
             }
             return undefined
           })
@@ -656,16 +631,12 @@ export default class RenderSettlementCompanyTypeB {
         if (event.currentTarget instanceof HTMLSelectElement) {
           const getValue = event.currentTarget.value
           this.store.periodPaymentSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-            if (getValue === '') {
-              return dataInfo
-            }
+            if (getValue === '') return dataInfo
             const processingNumber =
               dataInfo.利用料率.lastIndexOf('%') > -1
                 ? dataInfo.利用料率.slice(dataInfo.利用料率.lastIndexOf('〜') + 1, dataInfo.利用料率.lastIndexOf('%'))
                 : ''
-            if (processingNumber !== '' && Number(getValue) >= Number(processingNumber)) {
-              return dataInfo
-            }
+            if (processingNumber !== '' && Number(getValue) >= Number(processingNumber)) return dataInfo
             return undefined
           })
         }
@@ -685,19 +656,13 @@ export default class RenderSettlementCompanyTypeB {
           const inputElement = event.currentTarget
           const getValue = Object.keys(this.rateHandlingDictionary)
             .map((keyInfo): string | undefined => {
-              if (this.rateHandlingDictionary[keyInfo].includes(inputElement.value)) {
-                return this.rateHandlingDictionary[keyInfo][2]
-              }
+              if (this.rateHandlingDictionary[keyInfo].includes(inputElement.value)) return this.rateHandlingDictionary[keyInfo][2]
               return undefined
             })
             .filter((info): boolean => info !== undefined)
           this.store.rateHandlingSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-            if (getValue.length === 0) {
-              return dataInfo
-            }
-            if (dataInfo.期間終了後の手数料の取扱い === getValue[0]) {
-              return dataInfo
-            }
+            if (getValue.length === 0) return dataInfo
+            if (dataInfo.期間終了後の手数料の取扱い === getValue[0]) return dataInfo
             return undefined
           })
         }
@@ -717,19 +682,13 @@ export default class RenderSettlementCompanyTypeB {
           const inputElement = event.currentTarget
           const getValue = Object.keys(this.paymentTimingDictionary)
             .map((keyInfo): string | undefined => {
-              if (this.paymentTimingDictionary[keyInfo].includes(inputElement.value)) {
-                return this.paymentTimingDictionary[keyInfo][2]
-              }
+              if (this.paymentTimingDictionary[keyInfo].includes(inputElement.value)) return this.paymentTimingDictionary[keyInfo][2]
               return undefined
             })
             .filter((info): boolean => info !== undefined)
           this.store.paymentTimingSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-            if (getValue.length === 0) {
-              return dataInfo
-            }
-            if (dataInfo.入金タイミング === getValue[0]) {
-              return dataInfo
-            }
+            if (getValue.length === 0) return dataInfo
+            if (dataInfo.入金タイミング === getValue[0]) return dataInfo
             return undefined
           })
         }
@@ -750,25 +709,19 @@ export default class RenderSettlementCompanyTypeB {
           const getRegionValue = Object.keys(this.providerAreaDictionary)
             .map((keyInfo): string | undefined => {
               if (inputElement.value === '') return
-              if (this.providerAreaDictionary[keyInfo].includes(inputElement.value)) {
-                return this.providerAreaDictionary[keyInfo][2]
-              }
+              if (this.providerAreaDictionary[keyInfo].includes(inputElement.value)) return this.providerAreaDictionary[keyInfo][2]
               return undefined
             })
             .filter((info): boolean => info !== undefined)
           const getAreaValue = Object.keys(this.providerAreaDictionary)
             .map((keyInfo): string | undefined => {
               if (inputElement.value === '') return
-              if (this.providerAreaDictionary[keyInfo].includes(inputElement.value)) {
-                return this.providerAreaDictionary[keyInfo][3]
-              }
+              if (this.providerAreaDictionary[keyInfo].includes(inputElement.value)) return this.providerAreaDictionary[keyInfo][3]
               return undefined
             })
             .filter((info): boolean => info !== undefined)
           this.store.provideAreaSelectBoxData = this.store.initializeData.filter((dataInfo): TypeB | undefined => {
-            if (getRegionValue.length === 0 && getAreaValue.length === 0) {
-              return dataInfo
-            }
+            if (getRegionValue.length === 0 && getAreaValue.length === 0) return dataInfo
             if (
               dataInfo.個票.map((individualDataInfo): boolean => individualDataInfo.サービス提供エリア.includes(getRegionValue[0]!)).includes(true) ||
               dataInfo.個票.map((individualDataInfo): boolean => individualDataInfo.サービス提供エリア.includes(getAreaValue[0]!)).includes(true)
@@ -974,13 +927,16 @@ export default class RenderSettlementCompanyTypeB {
   Infinite Scroll Render.
   */
   public infiniteScrollRender(): void {
-    if (!this.store.firstRender && window.pageYOffset > this.selectors.lists!.clientHeight) {
-      if (this.store.scrollCount < this.store.publicationData.length / this.store.renderQuantity) {
-        this.store.scrollCount += 1
-        this.render(this.store.publicationData)
-      } else {
-        this.selectors.loading!.classList.add('is-inactive')
-      }
+    const wrapperHeight = !document
+      .querySelector('meta[name="viewport"]')!
+      .getAttribute('content')
+      ?.includes('width=960')
+      ? this.selectors.lists!.clientHeight
+      : this.selectors.lists!.clientHeight - 500
+    if (!this.store.firstRender && window.pageYOffset > wrapperHeight && this.store.scrollRender) {
+      this.store.scrollCount += 1
+      this.store.scrollRender = this.store.scrollCount < this.store.publicationData.length / this.store.renderQuantity
+      this.store.scrollRender ? this.render(this.store.publicationData) : this.selectors.loading!.classList.add('is-inactive')
     }
   }
 }

@@ -33,7 +33,7 @@ export default class RenderBinSettlementCompanyTypeA {
       dataWrapper: document.querySelector('.fn-data-wrapper'),
       searchTargetStoreButton: document.querySelector('.components-search-target-store-button')
     }
-    // Array to Store Each Data.
+    // State in This File.
     this.store = {
       initializeData: [],
       freeWordData: []

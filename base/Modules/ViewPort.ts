@@ -12,8 +12,6 @@ export default class ViewPort {
   }
 
   public onTablet(): void {
-    if (this.UA.includes('iPad') || this.UA.includes('Kindle')) {
-      document.querySelector('meta[name="viewport"]')!.setAttribute('content', 'width=960')
-    }
+    if (this.UA.includes('iPad') || this.UA.includes('Kindle')) document.querySelector('meta[name="viewport"]')!.setAttribute('content', 'width=960')
   }
 }

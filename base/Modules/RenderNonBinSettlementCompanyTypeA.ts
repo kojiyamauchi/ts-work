@@ -21,6 +21,7 @@ export default class RenderNonBinSettlementCompanyTypeA {
   private paymentMethodDictionary: CommonDictionaryTypes
   private store: {
     firstRender: boolean
+    scrollRender: boolean
     scrollCount: number
     renderQuantity: number
     initializeData: NonBinTypeA[]
@@ -59,9 +60,10 @@ export default class RenderNonBinSettlementCompanyTypeA {
       Jデビット: [true, 'j-debit', 'Jデビット'],
       その他: [true, 'other-payment', 'その他']
     }
-    // Array to Store Each Data.
+    // State in This File.
     this.store = {
       firstRender: true,
+      scrollRender: true,
       scrollCount: 0,
       renderQuantity: 20,
       initializeData: [],
@@ -116,13 +118,13 @@ export default class RenderNonBinSettlementCompanyTypeA {
       this.selectors.lists!.removeChild(dataList)
     })
     this.store.scrollCount = 0
+    this.store.scrollRender = true
   }
 
   private onView(): void {
     if (this.store.firstRender) this.selectors.searchArea!.classList.add('is-active')
     this.selectors.lists!.classList.add('is-active')
     this.selectors.searchTargetStoreButton!.classList.add('is-active')
-    this.selectors.loading!.classList.add('is-scroll-loading')
     this.store.firstRender = false
   }
 
@@ -144,10 +146,7 @@ export default class RenderNonBinSettlementCompanyTypeA {
       <dt class="each-checkbox-heading">決済手段</dt>
       <dd class="each-checkbox-data fn-checkbox-payment-method"></dd>
     `
-    if (this.selectors.searchItemsWrapper) {
-      this.selectors.searchItemsWrapper.appendChild(createEachCheckBoxWrapperElement)
-    }
-
+    if (this.selectors.searchItemsWrapper) this.selectors.searchItemsWrapper.appendChild(createEachCheckBoxWrapperElement)
     Object.keys(this.paymentMethodDictionary).map((info): void => {
       if (this.paymentMethodDictionary[info][0]) {
         const createEachCheckBoxElement = document.createElement('span')
@@ -164,9 +163,7 @@ export default class RenderNonBinSettlementCompanyTypeA {
              ${info}
           </label>
         `
-        if (document.querySelector('.fn-checkbox-payment-method')) {
-          document.querySelector('.fn-checkbox-payment-method')!.appendChild(createEachCheckBoxElement)
-        }
+        if (document.querySelector('.fn-checkbox-payment-method')) document.querySelector('.fn-checkbox-payment-method')!.appendChild(createEachCheckBoxElement)
       }
     })
   }
@@ -174,16 +171,15 @@ export default class RenderNonBinSettlementCompanyTypeA {
   /*
   Render Data List Core.
   */
-  private async render(addData: NonBinTypeA[]): Promise<void> {
+  private render(addData: NonBinTypeA[]): void {
     if (addData.length > 0) {
-      addData.map(
-        async (info, index): Promise<void> => {
-          if (this.store.scrollCount * this.store.renderQuantity <= index && index < (this.store.scrollCount + 1) * this.store.renderQuantity) {
-            const createDataListElement = document.createElement('div')
-            createDataListElement.classList.add('data-list')
-            createDataListElement.classList.add('fn-data-list')
-            // prettier-ignore
-            createDataListElement.innerHTML = `
+      addData.map((info, index): void => {
+        if (this.store.scrollCount * this.store.renderQuantity <= index && index < (this.store.scrollCount + 1) * this.store.renderQuantity) {
+          const createDataListElement = document.createElement('div')
+          createDataListElement.classList.add('data-list')
+          createDataListElement.classList.add('fn-data-list')
+          // prettier-ignore
+          createDataListElement.innerHTML = `
             <dl class="data-list-heading">
               <dt class="data-list-heading-letter">
                 ${info.キャッシュレスサービス名称}
@@ -247,11 +243,13 @@ export default class RenderNonBinSettlementCompanyTypeA {
               </dd>
             </dl>
           `
-            if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
-          }
+          if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
         }
-      )
+      })
       this.moreInformation()
+      addData.length > this.store.renderQuantity
+        ? this.selectors.loading!.classList.add('is-scroll-loading')
+        : this.selectors.loading!.classList.add('is-inactive')
     } else {
       const createDataListElement = document.createElement('div')
       createDataListElement.classList.add('data-list')
@@ -288,13 +286,9 @@ export default class RenderNonBinSettlementCompanyTypeA {
               })
             })
           this.store.paymentMethodCheckBoxData = this.store.initializeData.filter((dataInfo): NonBinTypeA | undefined => {
-            if (checkedList.length === 0) {
-              return dataInfo
-            }
+            if (checkedList.length === 0) return dataInfo
             for (let i = 0; i < checkedList.length; i++) {
-              if (dataInfo.キャッシュレスサービス区分.includes(checkedList[i])) {
-                return dataInfo
-              }
+              if (dataInfo.キャッシュレスサービス区分.includes(checkedList[i])) return dataInfo
             }
             return undefined
           })
@@ -491,13 +485,16 @@ export default class RenderNonBinSettlementCompanyTypeA {
   }
 
   public infiniteScrollRender(): void {
-    if (!this.store.firstRender && window.pageYOffset > this.selectors.lists!.clientHeight) {
-      if (this.store.scrollCount < this.store.publicationData.length / this.store.renderQuantity) {
-        this.store.scrollCount += 1
-        this.render(this.store.publicationData)
-      } else {
-        this.selectors.loading!.classList.add('is-inactive')
-      }
+    const wrapperHeight = !document
+      .querySelector('meta[name="viewport"]')!
+      .getAttribute('content')
+      ?.includes('width=960')
+      ? this.selectors.lists!.clientHeight
+      : this.selectors.lists!.clientHeight - 500
+    if (!this.store.firstRender && window.pageYOffset > wrapperHeight && this.store.scrollRender) {
+      this.store.scrollCount += 1
+      this.store.scrollRender = this.store.scrollCount < this.store.publicationData.length / this.store.renderQuantity
+      this.store.scrollRender ? this.render(this.store.publicationData) : this.selectors.loading!.classList.add('is-inactive')
     }
   }
 }
