@@ -177,24 +177,6 @@ export default class RenderSettlementCompanyTypeBDetail {
 
                   <table class="detail-table table-third">
                     <tr class="table-heading-wrapper">
-                      <th colspan="2" class="table-primary-heading">入金のタイミング</th>
-                    </tr>
-                    <tr class="table-data-wrapper">
-                      <td colspan="2" class="table-data">${eachDataInfo.入金タイミング}</td>
-                    </tr>
-                      ${eachDataInfo.入金タイミング === '複数回' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">回数</th><td class="table-data">${eachDataInfo.複数回の場合の回数}回</td></tr>`: ''}
-                      ${eachDataInfo.入金タイミング === '複数回' && eachDataInfo.月次一括の場合の締日 !== '' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">締日</th><td class="table-data">${eachDataInfo.月次一括の場合の締日}</td></tr>`: ''}
-                      ${eachDataInfo.入金タイミング === '複数回' && eachDataInfo.月次一括の場合の支払日 !== '' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">支払日</th><td class="table-data">${eachDataInfo.月次一括の場合の支払日}</td></tr>`: ''}
-                      ${eachDataInfo.入金タイミング !== '複数回' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">締日</th><td class="table-data">${eachDataInfo.月次一括の場合の締日}</td></tr>`: ''}
-                      ${eachDataInfo.入金タイミング !== '複数回' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">支払日</th><td class="table-data">${eachDataInfo.月次一括の場合の支払日}</td></tr>`: ''}
-                    <tr class="table-data-wrapper">
-                      <th class="table-secondary-heading">振込手数料</th>
-                      <td class="table-data">${eachDataInfo.振込手数料}</td>
-                    </tr>
-                  </table>
-
-                  <table class="detail-table table-fourth">
-                    <tr class="table-heading-wrapper">
                       <th colspan="2" class="table-primary-heading">期間中に追加的に発生する費用</th>
                     </tr>
                     <tr class="table-data-wrapper">
@@ -215,7 +197,7 @@ export default class RenderSettlementCompanyTypeBDetail {
                     </tr>
                   </table>
 
-                  <table class="detail-table table-fifth">
+                  <table class="detail-table table-fourth">
                     <tr class="table-heading-wrapper">
                       <th colspan="2" class="table-primary-heading">期間終了後に発生する費用</th>
                     </tr>
@@ -237,7 +219,34 @@ export default class RenderSettlementCompanyTypeBDetail {
                     </tr>
                   </table>
 
+                  <table class="detail-table table-fifth">
+                    <tr class="table-heading-wrapper">
+                      <th colspan="2" class="table-primary-heading">入金のタイミング</th>
+                    </tr>
+                    <tr class="table-data-wrapper">
+                      <td colspan="2" class="table-data">${eachDataInfo.入金タイミング}</td>
+                    </tr>
+                      ${eachDataInfo.入金タイミング === '複数回' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">回数</th><td class="table-data">${eachDataInfo.複数回の場合の回数}回</td></tr>`: ''}
+                      ${eachDataInfo.入金タイミング === '複数回' && eachDataInfo.月次一括の場合の締日 !== '' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">締日</th><td class="table-data">${eachDataInfo.月次一括の場合の締日}</td></tr>`: ''}
+                      ${eachDataInfo.入金タイミング === '複数回' && eachDataInfo.月次一括の場合の支払日 !== '' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">支払日</th><td class="table-data">${eachDataInfo.月次一括の場合の支払日}</td></tr>`: ''}
+                      ${eachDataInfo.入金タイミング !== '複数回' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">締日</th><td class="table-data">${eachDataInfo.月次一括の場合の締日}</td></tr>`: ''}
+                      ${eachDataInfo.入金タイミング !== '複数回' ? `<tr class="table-data-wrapper"><th class="table-secondary-heading">支払日</th><td class="table-data">${eachDataInfo.月次一括の場合の支払日}</td></tr>`: ''}
+                    <tr class="table-data-wrapper">
+                      <th class="table-secondary-heading">振込手数料</th>
+                      <td class="table-data">${eachDataInfo.振込手数料}</td>
+                    </tr>
+                  </table>
+
                   <table class="detail-table table-sixth">
+                    <tr class="table-heading-wrapper">
+                      <th class="table-primary-heading">入金サイクル</th>
+                    </tr>
+                    <tr class="table-data-wrapper">
+                      <td class="table-data">${eachDataInfo.入金サイクル}</td>
+                    </tr>
+                  </table>
+
+                  <table class="detail-table table-seventh">
                     <tr class="table-heading-wrapper">
                       <th class="table-primary-heading">対応可能なブランド/サービス</th>
                     </tr>
@@ -263,7 +272,7 @@ export default class RenderSettlementCompanyTypeBDetail {
                     </tr>
                   </table>
 
-                  <table class="detail-table table-seventh">
+                  <table class="detail-table table-eighth">
                     <tr class="table-heading-wrapper">
                       <th class="table-primary-heading">サービスURL</th>
                     </tr>
@@ -272,7 +281,7 @@ export default class RenderSettlementCompanyTypeBDetail {
                     </tr>
                   </table>
 
-                  <table class="detail-table table-eighth">
+                  <table class="detail-table table-ninth">
                     <tr class="table-heading-wrapper">
                       <th class="table-primary-heading">備考</th>
                     </tr>
@@ -281,7 +290,7 @@ export default class RenderSettlementCompanyTypeBDetail {
                     </tr>
                   </table>
 
-                  <table class="detail-table table-ninth">
+                  <table class="detail-table table-tenth">
                     <tr class="table-heading-wrapper">
                       <th class="table-primary-heading">サービス提供エリア</th>
                     </tr>
@@ -340,7 +349,7 @@ export default class RenderSettlementCompanyTypeBDetail {
                     </tr>
                   </table>
 
-                  <table class="detail-table table-tenth">
+                  <table class="detail-table table-eleventh">
                     <tr class="table-heading-wrapper">
                       <th class="table-primary-heading">営業対象職種</th>
                     </tr>
