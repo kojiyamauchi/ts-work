@@ -30,7 +30,7 @@ export default class AppTop {
 
   public init(): void {
     this.slideShow.core()
-    this.slideShow.optionsFirst()
+    this.slideShow.optionAddIndex()
     this.anchorToApp.core()
   }
 

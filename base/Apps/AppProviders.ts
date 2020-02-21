@@ -23,7 +23,7 @@ export default class AppProviders {
 
   public init(): void {
     this.slideShow.core()
-    this.slideShow.optionsFirst()
+    this.slideShow.optionAddIndex()
   }
 
   public domContentLoaded(): void {}
