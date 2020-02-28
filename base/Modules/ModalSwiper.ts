@@ -12,6 +12,8 @@ export default class ModalSwiper {
   private closeButton: HTMLElement | null
   private modalWrapper: HTMLElement | null
   private modalComponent: HTMLElement | null
+  private modalPaginationContainer: HTMLElement | null
+  private layer: HTMLElement | null
   private cssTransitionDuration: number
 
   public constructor(
@@ -19,13 +21,17 @@ export default class ModalSwiper {
     openButton: NodeListOf<HTMLElement>,
     closeButton: HTMLElement | null,
     modalWrapper: HTMLElement | null,
-    modalComponent: HTMLElement | null
+    modalComponent: HTMLElement | null,
+    modalPaginationContainer: HTMLElement | null,
+    layer: HTMLElement | null
   ) {
     this.modalSwiperContainer = modalSwiperContainer
     this.openButton = openButton
     this.closeButton = closeButton
     this.modalWrapper = modalWrapper
     this.modalComponent = modalComponent
+    this.modalPaginationContainer = modalPaginationContainer
+    this.layer = layer
     this.cssTransitionDuration = 250
   }
 
@@ -39,7 +45,7 @@ export default class ModalSwiper {
         prevEl: '.fn-modal-swiper-container-button-prev'
       },
       pagination: {
-        el: '.fn-modal-swiper-container-pagination',
+        el: this.modalPaginationContainer,
         type: 'fraction',
         clickable: true
       }
@@ -52,11 +58,10 @@ export default class ModalSwiper {
 
   public open(): void {
     if (this.openButton.length > 0) {
-      const mySwiper = this.modalSwiperContainer!.swiper
       Array.from(this.openButton, (selector): void => {
         selector.addEventListener('click', (event): void => {
           if (event.currentTarget instanceof HTMLElement) {
-            mySwiper.slideTo(event.currentTarget.dataset.slideIndex, 0, false)
+            this.modalSwiperContainer!.swiper.slideTo(event.currentTarget.dataset.slideIndex, 0, false)
             this.modalWrapper!.classList.add('is-active')
             this.modalComponent!.classList.add('is-active')
             this.closeButton!.classList.add('is-active')
@@ -67,14 +72,14 @@ export default class ModalSwiper {
   }
 
   public close(): void {
-    if (this.closeButton) {
-      const mySwiper = this.modalSwiperContainer!.swiper
-      this.closeButton.addEventListener('click', (): void => {
-        this.modalWrapper!.classList.remove('is-active')
-        this.modalComponent!.classList.remove('is-active')
-        this.closeButton!.classList.remove('is-active')
-        setTimeout((): void => mySwiper.slideTo(1, 0, false), this.cssTransitionDuration)
-      })
+    const closeCore = (): void => {
+      this.modalWrapper!.classList.remove('is-active')
+      this.modalComponent!.classList.remove('is-active')
+      this.closeButton!.classList.remove('is-active')
+      setTimeout((): void => this.modalSwiperContainer!.swiper.slideTo(1, 0, false), this.cssTransitionDuration)
     }
+    if (this.closeButton) this.closeButton.addEventListener('click', (): void => closeCore())
+    if (this.layer) this.layer.addEventListener('click', (): void => closeCore())
+    if (this.modalPaginationContainer) this.modalPaginationContainer.addEventListener('click', (): void => closeCore())
   }
 }

@@ -17,6 +17,8 @@ export default class AppConsumer {
     modalCloseButton: HTMLElement | null
     modalWrapper: HTMLElement | null
     modalComponent: HTMLElement | null
+    modalPaginationContainer: HTMLElement | null
+    layer: HTMLElement | null
     toApp: NodeListOf<HTMLElement>
     anchorApp: HTMLElement | null
   }
@@ -33,6 +35,8 @@ export default class AppConsumer {
       modalCloseButton: document.querySelector('.fn-modal-close'),
       modalWrapper: document.querySelector('.fn-components-modal-swiper'),
       modalComponent: document.querySelector('.fn-modal-swiper'),
+      modalPaginationContainer: document.querySelector('.fn-modal-swiper-container-pagination'),
+      layer: document.querySelector('.fn-layer'),
       toApp: document.querySelectorAll('.fn-to-app'),
       anchorApp: document.querySelector('.fn-anchor-app')
     }
@@ -42,7 +46,9 @@ export default class AppConsumer {
       this.selectors.modalOpenButton,
       this.selectors.modalCloseButton,
       this.selectors.modalWrapper,
-      this.selectors.modalComponent
+      this.selectors.modalComponent,
+      this.selectors.modalPaginationContainer,
+      this.selectors.layer
     )
     this.anchorToApp = new AnchorLink(this.selectors.toApp, this.selectors.anchorApp)
   }
