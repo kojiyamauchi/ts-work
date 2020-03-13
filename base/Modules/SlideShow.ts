@@ -7,10 +7,12 @@
 import Swiper from 'swiper/dist/js/swiper.min.js'
 
 export default class SlideShow {
+  private playingSwiper: boolean
   private slideContainer: HTMLElement | null
   private indexDictionary: { [key: number]: string }
 
   public constructor(slideContainer: HTMLElement) {
+    this.playingSwiper = true
     this.slideContainer = slideContainer
     this.indexDictionary = {
       0: 'zero',
@@ -27,16 +29,9 @@ export default class SlideShow {
       // @ts-ignore TS6133: 'mySwiper' is declared but its value is never read.
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const mySwiper = new Swiper(this.slideContainer, {
+        autoplay: this.playingSwiper ? { delay: 5000, disableOnInteraction: false } : false,
         loop: true,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false
-        },
-        pagination: {
-          el: '.fn-slide-container-pagination',
-          type: 'bullets',
-          clickable: true
-        }
+        pagination: { el: '.fn-slide-container-pagination', type: 'bullets', clickable: true }
       })
     }, 2500)
   }
