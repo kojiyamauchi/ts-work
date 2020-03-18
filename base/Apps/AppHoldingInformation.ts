@@ -8,7 +8,7 @@
 import HoldingInformation from '@/base/Modules/HoldingInformation'
 
 export default class AppHoldingInformation {
-  private holdingInformation: HoldingInformation
+  private readonly holdingInformation: HoldingInformation
 
   public constructor() {
     this.holdingInformation = new HoldingInformation()

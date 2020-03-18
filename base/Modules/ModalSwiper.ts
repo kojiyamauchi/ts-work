@@ -7,14 +7,14 @@
 import Swiper from 'swiper/dist/js/swiper.min.js'
 
 export default class ModalSwiper {
-  private modalSwiperContainer: HTMLElement | null
-  private openButton: NodeListOf<HTMLElement>
-  private closeButton: HTMLElement | null
-  private modalWrapper: HTMLElement | null
-  private modalComponent: HTMLElement | null
-  private modalPaginationContainer: HTMLElement | null
-  private layer: HTMLElement | null
-  private cssTransitionDuration: number
+  private readonly modalSwiperContainer: HTMLElement | null
+  private readonly openButton: NodeListOf<HTMLElement>
+  private readonly closeButton: HTMLElement | null
+  private readonly modalWrapper: HTMLElement | null
+  private readonly modalComponent: HTMLElement | null
+  private readonly modalPaginationContainer: HTMLElement | null
+  private readonly layer: HTMLElement | null
+  private readonly cssTransitionDuration: number
 
   public constructor(
     modalSwiperContainer: HTMLElement | null,

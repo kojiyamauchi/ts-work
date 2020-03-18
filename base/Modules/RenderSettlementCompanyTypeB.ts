@@ -6,33 +6,33 @@
 import fetch from 'isomorphic-fetch'
 
 export default class RenderSettlementCompanyTypeB {
-  private url: string
-  private endPoint: string
+  private readonly url: string
+  private readonly endPoint: string
   private selectors: {
-    searchArea: HTMLElement | null
-    searchItemsWrapper: HTMLElement | null
-    freeWordBox: HTMLInputElement | null
-    searchButton: HTMLElement | null
-    loading: HTMLElement | null
-    listsWrapper: HTMLElement | null
-    lists: HTMLElement | null
+    readonly searchArea: HTMLElement | null
+    readonly searchItemsWrapper: HTMLElement | null
+    readonly freeWordBox: HTMLInputElement | null
+    readonly searchButton: HTMLElement | null
+    readonly loading: HTMLElement | null
+    readonly listsWrapper: HTMLElement | null
+    readonly lists: HTMLElement | null
   }
 
-  private paymentMethodDictionary: CommonDictionaryTypes<string, string | null>
-  private usageTerminalDictionary: CommonDictionaryTypes
-  private rateHandlingDictionary: CommonDictionaryTypes
-  private paymentTimingDictionary: CommonDictionaryTypes
-  private providerAreaDictionary: CommonDictionaryTypes
-  private periodPaymentRateDictionary: CommonDictionaryTypes<number, string>
+  private readonly paymentMethodDictionary: CommonDictionaryTypes<string, string | null>
+  private readonly usageTerminalDictionary: CommonDictionaryTypes
+  private readonly rateHandlingDictionary: CommonDictionaryTypes
+  private readonly paymentTimingDictionary: CommonDictionaryTypes
+  private readonly providerAreaDictionary: CommonDictionaryTypes
+  private readonly periodPaymentRateDictionary: CommonDictionaryTypes<number, string>
   private paymentMethodIconDictionary: {
-    [key: string]: string
+    readonly [key: string]: string
   }
 
+  private readonly renderQuantity: number
   private store: {
     firstRender: boolean
     scrollRender: boolean
     scrollCount: number
-    renderQuantity: number
     initializeData: TypeB[]
     paymentMethodCheckBoxData: TypeB[]
     usageTerminalCheckBoxData: TypeB[]
@@ -178,12 +178,14 @@ export default class RenderSettlementCompanyTypeB {
       その他: 'icon_card_et',
       デビットカード: 'icon_card_jd'
     }
+
+    // Number of Renders One Time.
+    this.renderQuantity = 20
     // State in This File.
     this.store = {
       firstRender: true,
       scrollRender: true,
       scrollCount: 0,
-      renderQuantity: 20,
       initializeData: [],
       paymentMethodCheckBoxData: [],
       usageTerminalCheckBoxData: [],
@@ -464,7 +466,7 @@ export default class RenderSettlementCompanyTypeB {
   private render(addData: TypeB[]): void {
     if (addData.length > 0) {
       addData.map((info, index): void => {
-        if (this.store.scrollCount * this.store.renderQuantity <= index && index < (this.store.scrollCount + 1) * this.store.renderQuantity) {
+        if (this.store.scrollCount * this.renderQuantity <= index && index < (this.store.scrollCount + 1) * this.renderQuantity) {
           const imageCheck = this.getImageUrl(`${this.url}/assets/img/${info.dataID}.png`)
           const createDataListElement = document.createElement('a')
           createDataListElement.classList.add('data-list')
@@ -535,9 +537,7 @@ export default class RenderSettlementCompanyTypeB {
           if (this.selectors.lists) this.selectors.lists.appendChild(createDataListElement)
         }
       })
-      addData.length > this.store.renderQuantity
-        ? this.selectors.loading!.classList.add('is-scroll-loading')
-        : this.selectors.loading!.classList.add('is-inactive')
+      addData.length > this.renderQuantity ? this.selectors.loading!.classList.add('is-scroll-loading') : this.selectors.loading!.classList.add('is-inactive')
     } else {
       const createDataListElement = document.createElement('div')
       createDataListElement.classList.add('data-list')
@@ -935,7 +935,7 @@ export default class RenderSettlementCompanyTypeB {
       : this.selectors.lists!.clientHeight - 500
     if (!this.store.firstRender && window.pageYOffset > wrapperHeight && this.store.scrollRender) {
       this.store.scrollCount += 1
-      this.store.scrollRender = this.store.scrollCount < this.store.publicationData.length / this.store.renderQuantity
+      this.store.scrollRender = this.store.scrollCount < this.store.publicationData.length / this.renderQuantity
       this.store.scrollRender ? this.render(this.store.publicationData) : this.selectors.loading!.classList.add('is-inactive')
     }
   }

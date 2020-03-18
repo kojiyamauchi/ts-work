@@ -11,21 +11,21 @@ import AnchorLink from '@/base/Modules/AnchorLink'
 
 export default class AppConsumer {
   private selectors: {
-    slideContainer: HTMLElement | null
-    modalSwiperContainer: HTMLElement | null
-    modalOpenButton: NodeListOf<HTMLElement>
-    modalCloseButton: HTMLElement | null
-    modalWrapper: HTMLElement | null
-    modalComponent: HTMLElement | null
-    modalPaginationContainer: HTMLElement | null
-    layer: HTMLElement | null
-    toApp: NodeListOf<HTMLElement>
-    anchorApp: HTMLElement | null
+    readonly slideContainer: HTMLElement | null
+    readonly modalSwiperContainer: HTMLElement | null
+    readonly modalOpenButton: NodeListOf<HTMLElement>
+    readonly modalCloseButton: HTMLElement | null
+    readonly modalWrapper: HTMLElement | null
+    readonly modalComponent: HTMLElement | null
+    readonly modalPaginationContainer: HTMLElement | null
+    readonly layer: HTMLElement | null
+    readonly toApp: NodeListOf<HTMLElement>
+    readonly anchorApp: HTMLElement | null
   }
 
-  private slideShow: SlideShow
-  private modalSwiper: ModalSwiper
-  private anchorToApp: AnchorLink
+  private readonly slideShow: SlideShow
+  private readonly modalSwiper: ModalSwiper
+  private readonly anchorToApp: AnchorLink
 
   public constructor() {
     this.selectors = {

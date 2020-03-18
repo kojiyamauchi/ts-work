@@ -5,17 +5,17 @@
 */
 
 export default class GlobalNavigation {
+  private readonly subMenuHeight: number
+  private readonly breakPoint: number
+  private readonly componentHeader: HTMLElement | null
+  private readonly menuBtn: HTMLElement | null
+  private readonly menuLetter: HTMLElement | null
+  private readonly GN: HTMLElement | null
+  private readonly subMenuBtn: NodeListOf<HTMLElement>
+  private readonly subMenu: NodeListOf<HTMLElement>
+  private readonly navLayer: HTMLElement | null
   private documentHeight: number | null
-  private subMenuHeight: number
-  private breakPoint: number
   private isMobile: boolean
-  private componentHeader: HTMLElement | null
-  private menuBtn: HTMLElement | null
-  private menuLetter: HTMLElement | null
-  private GN: HTMLElement | null
-  private subMenuBtn: NodeListOf<HTMLElement>
-  private subMenu: NodeListOf<HTMLElement>
-  private navLayer: HTMLElement | null
 
   public constructor() {
     this.documentHeight = null

@@ -7,9 +7,9 @@
 import Swiper from 'swiper/dist/js/swiper.min.js'
 
 export default class SlideShow {
-  private playingSwiper: boolean
-  private slideContainer: HTMLElement | null
-  private indexArr: string[]
+  private readonly playingSwiper: boolean
+  private readonly slideContainer: HTMLElement | null
+  private readonly indexArr: string[]
 
   public constructor(slideContainer: HTMLElement) {
     this.playingSwiper = true

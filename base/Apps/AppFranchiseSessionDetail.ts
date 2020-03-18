@@ -9,18 +9,18 @@ import Modal from '@/base/Modules/Modal'
 
 export default class AppFranchiseSessionDetail {
   private selectors: {
-    openButtonModalFirst: HTMLElement | null
-    openButtonModalSecond: HTMLElement | null
-    modalWrapper: HTMLElement | null
-    modalFirst: HTMLElement | null
-    modalSecond: HTMLElement | null
-    modalLayer: HTMLElement | null
-    closeButtonModalFirst: HTMLElement | null
-    closeButtonModalSecond: HTMLElement | null
+    readonly openButtonModalFirst: HTMLElement | null
+    readonly openButtonModalSecond: HTMLElement | null
+    readonly modalWrapper: HTMLElement | null
+    readonly modalFirst: HTMLElement | null
+    readonly modalSecond: HTMLElement | null
+    readonly modalLayer: HTMLElement | null
+    readonly closeButtonModalFirst: HTMLElement | null
+    readonly closeButtonModalSecond: HTMLElement | null
   }
 
-  private modalFirst: Modal
-  private modalSecond: Modal
+  private readonly modalFirst: Modal
+  private readonly modalSecond: Modal
 
   public constructor() {
     this.selectors = {

@@ -6,15 +6,15 @@
 import fetch from 'isomorphic-fetch'
 
 export default class RenderBinSettlementCompanyTypeA {
-  private url: string
-  private endPoint: string
+  private readonly url: string
+  private readonly endPoint: string
   private selectors: {
-    freeWordBox: HTMLInputElement | null
-    searchButton: HTMLElement | null
-    tableWrapper: HTMLElement | null
-    loading: HTMLElement | null
-    dataWrapper: HTMLElement | null
-    searchTargetStoreButton: HTMLElement | null
+    readonly freeWordBox: HTMLInputElement | null
+    readonly searchButton: HTMLElement | null
+    readonly tableWrapper: HTMLElement | null
+    readonly loading: HTMLElement | null
+    readonly dataWrapper: HTMLElement | null
+    readonly searchTargetStoreButton: HTMLElement | null
   }
 
   private store: {

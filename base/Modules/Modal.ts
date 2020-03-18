@@ -5,11 +5,11 @@
 */
 
 export default class Modal {
-  private openButtonModal: HTMLElement | null
-  private modalWrapper: HTMLElement | null
-  private modalComponent: HTMLElement | null
-  private modalLayer: HTMLElement | null
-  private closeButtonModal: HTMLElement | null
+  private readonly openButtonModal: HTMLElement | null
+  private readonly modalWrapper: HTMLElement | null
+  private readonly modalComponent: HTMLElement | null
+  private readonly modalLayer: HTMLElement | null
+  private readonly closeButtonModal: HTMLElement | null
 
   public constructor(
     openButtonModal: HTMLElement | null,

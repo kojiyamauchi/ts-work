@@ -8,7 +8,7 @@
 import RenderBinSettlementCompanyTypeA from '@/base/Modules/RenderBinSettlementCompanyTypeA'
 
 export default class AppBinSettlementCompanyTypeA {
-  private renderBinSettlementCompanyTypeA: RenderBinSettlementCompanyTypeA
+  private readonly renderBinSettlementCompanyTypeA: RenderBinSettlementCompanyTypeA
 
   public constructor() {
     this.renderBinSettlementCompanyTypeA = new RenderBinSettlementCompanyTypeA()

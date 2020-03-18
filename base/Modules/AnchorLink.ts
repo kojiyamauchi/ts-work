@@ -8,8 +8,8 @@
 import jump from 'jump.js'
 
 export default class AnchorLink {
-  private anchorButton: NodeListOf<HTMLElement> | null
-  private anchorSelector: HTMLElement | null
+  private readonly anchorButton: NodeListOf<HTMLElement> | null
+  private readonly anchorSelector: HTMLElement | null
 
   public constructor(anchorButton: NodeListOf<HTMLElement> | null, anchorSelector: HTMLElement | null) {
     this.anchorButton = anchorButton

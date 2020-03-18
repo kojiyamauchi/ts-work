@@ -8,7 +8,7 @@
 import SiteMap from '@/base/Modules/SiteMap'
 
 export default class AppSiteMap {
-  private siteMap: SiteMap
+  private readonly siteMap: SiteMap
 
   public constructor() {
     this.siteMap = new SiteMap()

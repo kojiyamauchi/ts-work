@@ -10,9 +10,9 @@ import GlobalNavigation from '@/base/Modules/GlobalNavigation'
 import JumpTop from '@/base/Modules/JumpTop'
 
 export default class AppGlobal {
-  private viewPort: ViewPort
-  private globalNavigation: GlobalNavigation
-  private jumpTop: JumpTop
+  private readonly viewPort: ViewPort
+  private readonly globalNavigation: GlobalNavigation
+  private readonly jumpTop: JumpTop
 
   public constructor() {
     this.viewPort = new ViewPort()

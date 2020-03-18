@@ -8,12 +8,12 @@
 import fetch from 'isomorphic-fetch'
 
 export default class SiteMap {
-  private url: string
-  private endPoint: string
+  private readonly url: string
+  private readonly endPoint: string
 
   private selectors: {
-    listInner: HTMLElement | null
-    loading: HTMLElement | null
+    readonly listInner: HTMLElement | null
+    readonly loading: HTMLElement | null
   }
 
   private data: { [key: string]: string }[]

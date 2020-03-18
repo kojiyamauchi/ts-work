@@ -5,12 +5,12 @@
 */
 
 export default class SettlementCompanyModal {
-  private settlementCompanyModal: HTMLElement | null
-  private settlementCompanyModalWrapper: HTMLElement | null
-  private settlementCompanyModalHeading: HTMLElement | null
-  private settlementCompanyModalScroll: HTMLElement | null
-  private modalOpenButton: NodeList
-  private modalCloseButton: HTMLElement | null
+  private readonly settlementCompanyModal: HTMLElement | null
+  private readonly settlementCompanyModalWrapper: HTMLElement | null
+  private readonly settlementCompanyModalHeading: HTMLElement | null
+  private readonly settlementCompanyModalScroll: HTMLElement | null
+  private readonly modalOpenButton: NodeList
+  private readonly modalCloseButton: HTMLElement | null
 
   public constructor() {
     this.settlementCompanyModal = document.querySelector('.fn-components-settlement-company-modal')

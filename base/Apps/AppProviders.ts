@@ -9,10 +9,10 @@ import SlideShow from '@/base/Modules/SlideShow'
 
 export default class AppProviders {
   private selectors: {
-    slideContainer: HTMLElement | null
+    readonly slideContainer: HTMLElement | null
   }
 
-  private slideShow: SlideShow
+  private readonly slideShow: SlideShow
 
   public constructor() {
     this.selectors = {

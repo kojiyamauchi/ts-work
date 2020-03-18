@@ -5,7 +5,7 @@
 */
 
 export default class Utilities {
-  private nodeList: NodeList
+  private readonly nodeList: NodeList
 
   public constructor(nodeList: NodeList) {
     this.nodeList = nodeList

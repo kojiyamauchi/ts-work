@@ -6,28 +6,28 @@
 import fetch from 'isomorphic-fetch'
 
 export default class HoldingInformation {
-  private url: string
-  private endPoint: string
-  private queryString: string
-  private removeString: string
+  private readonly url: string
+  private readonly endPoint: string
+  private readonly queryString: string
+  private readonly removeString: string
+  private readonly today: Date
+  private readonly year: string
+  private readonly month: string
+  private readonly day: string
+  private readonly hours: string
+  private readonly nowDate: string
   private area: string | null
-  private today: Date
-  private year: string
-  private month: string
-  private day: string
-  private hours: string
-  private nowDate: string
 
   private selectors: {
-    pageHeading: HTMLElement | null
-    freeWordBox: HTMLInputElement | null
-    searchButton: HTMLElement | null
-    loading: HTMLElement | null
-    listWrapper: HTMLElement | null
+    readonly pageHeading: HTMLElement | null
+    readonly freeWordBox: HTMLInputElement | null
+    readonly searchButton: HTMLElement | null
+    readonly loading: HTMLElement | null
+    readonly listWrapper: HTMLElement | null
   }
 
   private areaDictionary: {
-    [key: string]: string
+    readonly [key: string]: string
   }
 
   private store: {

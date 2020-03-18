@@ -10,12 +10,12 @@ import SlideShow from '@/base/Modules/SlideShow'
 
 export default class AppFranchise {
   private selectors: {
-    slideContainer: HTMLElement | null
-    anchorSchedule: HTMLElement | null
-    buttonToStepsJoin: NodeListOf<HTMLElement>
-    anchorStepsJoin: HTMLElement | null
-    buttonToContact: NodeListOf<HTMLElement>
-    anchorContact: HTMLElement | null
+    readonly slideContainer: HTMLElement | null
+    readonly anchorSchedule: HTMLElement | null
+    readonly buttonToStepsJoin: NodeListOf<HTMLElement>
+    readonly anchorStepsJoin: HTMLElement | null
+    readonly buttonToContact: NodeListOf<HTMLElement>
+    readonly anchorContact: HTMLElement | null
   }
 
   private anchorToSchedule: AnchorLink

@@ -10,13 +10,13 @@ import AnchorLink from '@/base/Modules/AnchorLink'
 
 export default class AppTop {
   private selectors: {
-    slideContainer: HTMLElement | null
-    toApp: NodeListOf<HTMLElement>
-    anchorApp: HTMLElement | null
+    readonly slideContainer: HTMLElement | null
+    readonly toApp: NodeListOf<HTMLElement>
+    readonly anchorApp: HTMLElement | null
   }
 
-  private slideShow: SlideShow
-  private anchorToApp: AnchorLink
+  private readonly slideShow: SlideShow
+  private readonly anchorToApp: AnchorLink
 
   public constructor() {
     this.selectors = {

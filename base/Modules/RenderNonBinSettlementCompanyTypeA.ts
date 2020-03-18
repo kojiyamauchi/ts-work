@@ -6,19 +6,19 @@
 import fetch from 'isomorphic-fetch'
 
 export default class RenderNonBinSettlementCompanyTypeA {
-  private url: string
-  private endPoint: string
+  private readonly url: string
+  private readonly endPoint: string
   private selectors: {
-    searchArea: HTMLElement | null
-    searchItemsWrapper: HTMLElement | null
-    freeWordBox: HTMLInputElement | null
-    searchButton: HTMLElement | null
-    loading: HTMLElement | null
-    lists: HTMLElement | null
-    searchTargetStoreButton: HTMLElement | null
+    readonly searchArea: HTMLElement | null
+    readonly searchItemsWrapper: HTMLElement | null
+    readonly freeWordBox: HTMLInputElement | null
+    readonly searchButton: HTMLElement | null
+    readonly loading: HTMLElement | null
+    readonly lists: HTMLElement | null
+    readonly searchTargetStoreButton: HTMLElement | null
   }
 
-  private paymentMethodDictionary: CommonDictionaryTypes
+  private readonly paymentMethodDictionary: CommonDictionaryTypes
   private store: {
     firstRender: boolean
     scrollRender: boolean

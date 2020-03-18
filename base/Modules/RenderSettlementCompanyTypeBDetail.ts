@@ -9,19 +9,20 @@ import jump from 'jump.js'
 import fetch from 'isomorphic-fetch'
 
 export default class RenderSettlementCompanyTypeBDetail {
-  private url: string
-  private parameter: string
-  private searchWord: string
-  private endPoint: string
+  private readonly url: string
+  private readonly parameter: string
+  private readonly searchWord: string
+  private readonly endPoint: string
+  private selectors: {
+    readonly component: HTMLElement | null
+    readonly loading: HTMLElement | null
+    readonly heading: HTMLElement | null
+    readonly componentsPaymentTerminalAnchorLinkButton: HTMLElement | null
+    readonly paymentTerminalAnchorLinkButton: HTMLElement | null
+  }
+
   private data: TypeB[]
   private ID: number | null
-  private selectors: {
-    component: HTMLElement | null
-    loading: HTMLElement | null
-    heading: HTMLElement | null
-    componentsPaymentTerminalAnchorLinkButton: HTMLElement | null
-    paymentTerminalAnchorLinkButton: HTMLElement | null
-  }
 
   public constructor() {
     this.url = window.location.origin

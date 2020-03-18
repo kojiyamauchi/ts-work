@@ -5,7 +5,7 @@
 */
 
 export default class ViewPort {
-  private UA: string
+  private readonly UA: string
 
   public constructor() {
     this.UA = navigator.userAgent

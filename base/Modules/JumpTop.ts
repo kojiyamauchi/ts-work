@@ -8,11 +8,11 @@
 import jump from 'jump.js'
 
 export default class JumpTop {
+  private readonly jumpTopComponent: HTMLElement | null
+  private readonly jumpTopBtn: HTMLElement | null
+  private readonly scrollTop: HTMLAnchorElement | null
   private windowHeight: number
   private currentScrollY: number
-  private jumpTopComponent: HTMLElement | null
-  private jumpTopBtn: HTMLElement | null
-  private scrollTop: HTMLAnchorElement | null
 
   public constructor() {
     this.windowHeight = window.innerHeight

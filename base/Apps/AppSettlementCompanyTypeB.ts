@@ -8,7 +8,7 @@
 import RenderSettlementCompanyTypeB from '@/base/Modules/RenderSettlementCompanyTypeB'
 
 export default class AppSettlementCompanyTypeB {
-  private renderSettlementCompanyTypeB: RenderSettlementCompanyTypeB
+  private readonly renderSettlementCompanyTypeB: RenderSettlementCompanyTypeB
 
   public constructor() {
     this.renderSettlementCompanyTypeB = new RenderSettlementCompanyTypeB()
