@@ -485,10 +485,7 @@ export default class RenderNonBinSettlementCompanyTypeA {
   }
 
   public infiniteScrollRender(): void {
-    const wrapperHeight = !document
-      .querySelector('meta[name="viewport"]')!
-      .getAttribute('content')
-      ?.includes('width=960')
+    const wrapperHeight = !document.querySelector('meta[name="viewport"]')!.getAttribute('content')?.includes('width=960')
       ? this.selectors.lists!.clientHeight
       : this.selectors.lists!.clientHeight - 500
     if (!this.store.firstRender && window.pageYOffset > wrapperHeight && this.store.scrollRender) {
