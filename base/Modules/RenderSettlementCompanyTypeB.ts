@@ -890,7 +890,6 @@ export default class RenderSettlementCompanyTypeB {
           return array.indexOf(info) === index && index !== array.lastIndexOf(info)
         })
       }, this.store.initializeData)
-      // console.log(this.store.publicationData)
       this.initializeList()
       this.render(this.store.publicationData)
     }
