@@ -89,9 +89,11 @@ export default class RenderSettlementCompanyTypeB {
       決済手段によって異なる: [true, 'depends-payment', '決済手段によって異なる']
     }
     this.paymentTimingDictionary = {
-      翌月一括: [true, 'monthly-summing-up', '翌月一括'],
+      月次一括: [true, 'monthly-summing-up', '月次一括'],
       複数回: [true, 'multiple', '複数回'],
       毎週: [true, 'every-week', '毎週'],
+      都度入金: [true, 'every-time', '都度入金'],
+      '選択型/条件型': [true, 'selection-type', '選択型/条件型'],
       その他: [true, 'other-timing', 'その他']
     }
     this.providerAreaDictionary = {
@@ -888,6 +890,7 @@ export default class RenderSettlementCompanyTypeB {
           return array.indexOf(info) === index && index !== array.lastIndexOf(info)
         })
       }, this.store.initializeData)
+      // console.log(this.store.publicationData)
       this.initializeList()
       this.render(this.store.publicationData)
     }
@@ -927,10 +930,7 @@ export default class RenderSettlementCompanyTypeB {
   Infinite Scroll Render.
   */
   public infiniteScrollRender(): void {
-    const wrapperHeight = !document
-      .querySelector('meta[name="viewport"]')!
-      .getAttribute('content')
-      ?.includes('width=960')
+    const wrapperHeight = !document.querySelector('meta[name="viewport"]')!.getAttribute('content')?.includes('width=960')
       ? this.selectors.lists!.clientHeight
       : this.selectors.lists!.clientHeight - 500
     if (!this.store.firstRender && window.pageYOffset > wrapperHeight && this.store.scrollRender) {
