@@ -62,7 +62,7 @@ export default class SiteMap {
           createListElement.classList.add('fn-list')
           createListElement.classList.add(`is-${info.category}`)
           createListElement.innerHTML = `
-            <a href="${info.endPoint}" class="letter is-${info.category}">
+            <a href="${info.endPoint}" target="_blank" class="letter is-${info.category}">
               <span class="tag">${info.category.toUpperCase()}</span><br>
               ${info.pageName}
             </a>
