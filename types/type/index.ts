@@ -2,11 +2,11 @@ interface HTMLElement extends Element {
   readonly swiper: any
 }
 
-interface CommonDictionaryTypes<SecondIndex = string, ThirdIndex = string> {
+type CommonDictionaryTypes<SecondIndex = string, ThirdIndex = string> = {
   readonly [key: string]: [boolean, SecondIndex, ThirdIndex, string?]
 }
 
-interface BinTypeA {
+type BinTypeA = {
   readonly dataID: number
   readonly ロゴ画像名: string
   readonly 決済事業者番号: string
@@ -18,7 +18,7 @@ interface BinTypeA {
   readonly 検索サービス: string
 }
 
-interface NonBinTypeA {
+type NonBinTypeA = {
   readonly dataID: number
   readonly ロゴ画像名: string
   readonly 決済事業者番号: string
@@ -52,7 +52,7 @@ interface NonBinTypeA {
   readonly 消費者向け問合せ窓口5受付時間の補足等: string
 }
 
-interface TypeB {
+type TypeB = {
   readonly dataID: number
   readonly ロゴ画像: string
   readonly 決済事業者1: string
@@ -137,7 +137,7 @@ interface TypeB {
   ]
 }
 
-interface HoldingInformationMember {
+type HoldingInformationMember = {
   readonly ID: number
   readonly newspaperEvent: boolean
   readonly checkDate: string
