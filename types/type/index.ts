@@ -1,7 +1,3 @@
-interface HTMLElement extends Element {
-  readonly swiper: any
-}
-
 type CommonDictionaryTypes<SecondIndex = string, ThirdIndex = string> = {
   readonly [key: string]: [boolean, SecondIndex, ThirdIndex, string?]
 }
@@ -62,20 +58,20 @@ type TypeB = {
   readonly 期間終了後の手数料の取扱い: string
   readonly 入金タイミング: string
   readonly 利用決済端末: string
-  readonly 個票: [
+  個票: [
     {
-      readonly 対応可能なブランド: {
+      対応可能なブランド: {
         readonly [key: string]: string[]
       }
       readonly サービスURL: string
-      readonly 決済手数料: {
+      決済手数料: {
         readonly [key: string]: string
       }
-      readonly 発生する費用: {
-        readonly 期間中: {
+      発生する費用: {
+        期間中: {
           readonly [key: string]: string
         }
-        readonly 期間終了後: {
+        期間終了後: {
           readonly [key: string]: string
         }
       }
@@ -86,7 +82,7 @@ type TypeB = {
       readonly 入金サイクル?: string
       readonly 振込手数料: string
       readonly サービス提供エリア: string[]
-      readonly 営業対象業種: {
+      営業対象業種: {
         readonly [key: string]: boolean
       }
       readonly 受付開始時間: string
@@ -97,7 +93,7 @@ type TypeB = {
       readonly 加盟店向けサービス問合せ備考: string
     }
   ]
-  readonly 対応可能な決済端末: [
+  対応可能な決済端末: [
     {
       readonly 種別: string
       readonly メーカー名: string
