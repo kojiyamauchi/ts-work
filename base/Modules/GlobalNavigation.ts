@@ -32,7 +32,7 @@ export default class GlobalNavigation {
     this.checkMobile()
   }
 
-  public checkMobile(): void {
+  private checkMobile(): void {
     window.addEventListener('resize', (): void => {
       this.isMobile = window.innerWidth < this.breakPoint
     })

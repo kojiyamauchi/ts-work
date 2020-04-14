@@ -23,7 +23,7 @@ export default class JumpTop {
     this.checkScroll()
   }
 
-  public checkScroll(): void {
+  private checkScroll(): void {
     window.addEventListener('scroll', (): void => {
       this.windowHeight = window.innerHeight
       this.currentScrollY = window.pageYOffset
