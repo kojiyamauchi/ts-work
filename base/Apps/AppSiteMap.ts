@@ -5,7 +5,7 @@
 */
 
 // Import Modules.
-import SiteMap from '@/base/Modules/SiteMap'
+import SiteMap from '@/Modules/SiteMap'
 
 export default class AppSiteMap {
   private readonly siteMap: SiteMap

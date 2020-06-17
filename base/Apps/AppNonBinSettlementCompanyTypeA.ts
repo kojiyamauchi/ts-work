@@ -5,7 +5,7 @@
 */
 
 // Import Modules.
-import RenderNonBinSettlementCompanyTypeA from '@/base/Modules/RenderNonBinSettlementCompanyTypeA'
+import RenderNonBinSettlementCompanyTypeA from '@/Modules/RenderNonBinSettlementCompanyTypeA'
 
 export default class AppNonBinSettlementCompanyTypeA {
   private readonly renderNonBinSettlementCompanyTypeA: RenderNonBinSettlementCompanyTypeA

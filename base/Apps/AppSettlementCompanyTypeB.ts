@@ -5,7 +5,7 @@
 */
 
 // Import Modules.
-import RenderSettlementCompanyTypeB from '@/base/Modules/RenderSettlementCompanyTypeB'
+import RenderSettlementCompanyTypeB from '@/Modules/RenderSettlementCompanyTypeB'
 
 export default class AppSettlementCompanyTypeB {
   private readonly renderSettlementCompanyTypeB: RenderSettlementCompanyTypeB

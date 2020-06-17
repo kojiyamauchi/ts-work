@@ -207,7 +207,7 @@ export default class RenderSettlementCompanyTypeB {
 
   // @ts-ignore TS6133: 'debugValue' is declared but its value is never read.
   private debugValue(arg: keyof TypeB): void {
-    const pickValueAry = this.store.initializeData.map((info): {} => {
+    const pickValueAry = this.store.initializeData.map((info): TypeB[keyof TypeB] => {
       return info[arg]
     })
     const removeDuplicate = pickValueAry
@@ -219,7 +219,7 @@ export default class RenderSettlementCompanyTypeB {
 
   // @ts-ignore TS6133: 'debugSortValue' is declared but its value is never read.
   private debugSortValue(arg: keyof TypeB): void {
-    const pickValueAry = this.store.initializeData.map((info): {} => {
+    const pickValueAry = this.store.initializeData.map((info): TypeB[keyof TypeB] => {
       return info[arg]
     })
     const sortByRemovingDuplicates = pickValueAry

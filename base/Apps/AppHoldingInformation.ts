@@ -5,7 +5,7 @@
 */
 
 // Import Modules.
-import HoldingInformation from '@/base/Modules/HoldingInformation'
+import HoldingInformation from '@/Modules/HoldingInformation'
 
 export default class AppHoldingInformation {
   private readonly holdingInformation: HoldingInformation

@@ -5,7 +5,7 @@
 */
 
 // Import Modules.
-import SlideShow from '@/base/Modules/SlideShow'
+import SlideShow from '@/Modules/SlideShow'
 
 export default class AppProviders {
   private selectors: {

@@ -5,7 +5,7 @@
 */
 
 // Import Modules.
-import Modal from '@/base/Modules/Modal'
+import Modal from '@/Modules/Modal'
 
 export default class AppFranchiseSessionDetail {
   private selectors: {

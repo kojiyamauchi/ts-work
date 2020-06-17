@@ -12,6 +12,9 @@ export default class SiteMap {
   private readonly endPoint: string
 
   private selectors: {
+    readonly numberPages: HTMLElement | null
+    readonly devNumberPages: HTMLElement | null
+    readonly prodNumberPages: HTMLElement | null
     readonly listInner: HTMLElement | null
     readonly loading: HTMLElement | null
   }
@@ -22,6 +25,9 @@ export default class SiteMap {
     this.url = window.location.origin
     this.endPoint = `${this.url}/assets/json/siteMap.json`
     this.selectors = {
+      numberPages: document.querySelector('.fn-number-pages'),
+      devNumberPages: document.querySelector('.fn-dev-number-pages'),
+      prodNumberPages: document.querySelector('.fn-prod-number-pages'),
       listInner: document.querySelector('.fn-site-map-inner'),
       loading: document.querySelector('.fn-icon-loading')
     }
@@ -48,15 +54,19 @@ export default class SiteMap {
   }
 
   private onView(): void {
+    this.selectors.numberPages!.classList.add('is-active')
     this.selectors.listInner!.classList.add('is-active')
     this.selectors.loading!.classList.add('is-inactive')
   }
 
   private async render(addData: { [key: string]: string }[]): Promise<void> {
     const renderDelay = 5
+    let devNumber = 0
+    let prodNumber = 0
     if (addData.length > 0) {
       addData.map(
         async (info, index): Promise<void> => {
+          info.category === 'production' ? prodNumber++ : devNumber++
           const createListElement = document.createElement('li')
           createListElement.classList.add('list')
           createListElement.classList.add('fn-list')
@@ -69,6 +79,8 @@ export default class SiteMap {
           `
           if (this.selectors.listInner) {
             await this.sleep(renderDelay * index)
+            this.selectors.devNumberPages!.textContent = String(devNumber)
+            this.selectors.prodNumberPages!.textContent = String(prodNumber)
             this.selectors.listInner.appendChild(createListElement)
           }
         }

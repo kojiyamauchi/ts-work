@@ -5,9 +5,9 @@
 */
 
 // Import Modules.
-import SlideShow from '@/base/Modules/SlideShow'
-import ModalSwiper from '@/base/Modules/ModalSwiper'
-import AnchorLink from '@/base/Modules/AnchorLink'
+import SlideShow from '@/Modules/SlideShow'
+import ModalSwiper from '@/Modules/ModalSwiper'
+import AnchorLink from '@/Modules/AnchorLink'
 
 export default class AppConsumer {
   private selectors: {

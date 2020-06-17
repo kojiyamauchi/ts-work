@@ -5,7 +5,7 @@
 */
 
 // Import Modules.
-import SettlementCompanyModal from '@/base/Modules/SettlementCompanyModal'
+import SettlementCompanyModal from '@/Modules/SettlementCompanyModal'
 
 export default class AppSettlementCompany {
   private readonly settlementCompanyModal: SettlementCompanyModal

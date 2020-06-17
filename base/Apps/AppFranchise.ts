@@ -5,8 +5,8 @@
 */
 
 // Import Modules.
-import AnchorLink from '@/base/Modules/AnchorLink'
-import SlideShow from '@/base/Modules/SlideShow'
+import AnchorLink from '@/Modules/AnchorLink'
+import SlideShow from '@/Modules/SlideShow'
 
 export default class AppFranchise {
   private selectors: {

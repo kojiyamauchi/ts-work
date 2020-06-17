@@ -5,8 +5,8 @@
 */
 
 // Import Modules.
-import SlideShow from '@/base/Modules/SlideShow'
-import AnchorLink from '@/base/Modules/AnchorLink'
+import SlideShow from '@/Modules/SlideShow'
+import AnchorLink from '@/Modules/AnchorLink'
 
 export default class AppTop {
   private selectors: {

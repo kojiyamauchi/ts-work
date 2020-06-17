@@ -5,9 +5,9 @@
 */
 
 // Import Modules.
-import ViewPort from '@/base/Modules/ViewPort'
-import GlobalNavigation from '@/base/Modules/GlobalNavigation'
-import JumpTop from '@/base/Modules/JumpTop'
+import ViewPort from '@/Modules/ViewPort'
+import GlobalNavigation from '@/Modules/GlobalNavigation'
+import JumpTop from '@/Modules/JumpTop'
 
 export default class AppGlobal {
   private readonly viewPort: ViewPort
