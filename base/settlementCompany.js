@@ -1,11 +1,11 @@
 /*
 
- settlementCompany.js
+ settlementCompany.js / This File is Not Used.
 
 */
 
 // Import Modules.
-import App from '@/base/Apps/AppSettlementCompany'
+import App from '@/Apps/AppSettlementCompany'
 
 // Created Instance.
 const app = new App()

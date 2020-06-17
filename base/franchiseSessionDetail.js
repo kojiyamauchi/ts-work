@@ -1,11 +1,11 @@
 /*
 
- franchiseSessionDetail.js
+ franchiseSessionDetail.js / This File is Not Used.
 
 */
 
 // Import Modules.
-import App from '@/base/Apps/AppFranchiseSessionDetail'
+import App from '@/Apps/AppFranchiseSessionDetail'
 
 // Created Instance.
 const app = new App()

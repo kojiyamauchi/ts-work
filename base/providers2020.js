@@ -1,11 +1,11 @@
 /*
 
- top.js
+ providers2020.js
 
 */
 
 // Import Modules.
-import App from '@/Apps/AppTop'
+import App from '@/Apps/AppProviders2020'
 
 // Created Instance.
 const app = new App()
