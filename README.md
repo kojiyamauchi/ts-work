@@ -10,6 +10,6 @@ Root
 |
 |- /js -> Build. **.min.js
 |- /types -> Declaration & Interface.
-|- /gas -> GAS From TypeScript Generate JSON. Add When Project is Over.
+|- /gas -> GAS From TypeScript Generate JSON.
 ```
 🛹
